@@ -1,0 +1,40 @@
+{
+  "name": "webdonasi",
+  "version": "1.0.0",
+  "description": "webdonasi",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha index.test.js -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhaWhaAdytoma/webdonasi.git"
+  },
+  "keywords": [
+    "webdonasi",
+    "mysql"
+  ],
+  "author": "Wha Wha-Desna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WhaWhaAdytoma/webdonasi/issues"
+  },
+  "homepage": "https://github.com/WhaWhaAdytoma/webdonasi#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parse": "^0.4.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-bootstrap-service": "^1.0.0",
+    "express-flash": "0.0.2",
+    "express-myconnection": "^1.0.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "jade": "^1.11.0",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "path": "^0.12.7"
+  }
+}

@@ -1,0 +1,116 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../layouts/header.ejs %>
+
+<% if (messages.error) { %>
+	<p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+	<p style="color:green"><%- messages.success %></p>
+<% } %>	
+
+<div>
+	<a href="/">
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	 Home 
+	</button>
+	</a>
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	 Add User
+	</button>
+	<!--  -->
+</div>	
+
+<div class="table-responsive">
+<table class="table">          
+
+	<tr style='text-align:left; background-color:#CCC'>
+		<th>Name</th>
+		<th>Age</th>
+		<th>Email</th>
+		<th>Action</th>
+	</tr>
+	
+	<!--
+		Using FOREACH LOOP for the users array
+		
+		myArray.forEach(function(el, index) {
+			// el - current element, i - index
+		});
+	-->
+	<% if (data) { %>
+	<% data.forEach(function(user){ %>
+		<tr>
+			<td><%= user.name %></td>
+			<td><%= user.age %></td>
+			<td><%= user.email %></td>
+			<td>
+				<div style="float:left">
+					<a class="btn btn-warning" href='/users/edit/<%= user.id %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>
+					<form method="post" action="/users/delete/<%= user.id %>"   style="float:right">					
+						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
+						<input type="hidden" name="_method" value="DELETE" />					
+					</form>
+				</div>
+			</td>
+		</tr>
+	<% }) %>
+	<% } %>
+
+</table>
+</div>
+
+
+
+
+<!-- Modal Add user -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+         <form>
+	          <div class="form-group">
+	            <label for="nama" class="control-label">Nama :</label>
+	            <input type="text" class="form-control" name="name" id="name" placeholder="Nama"  /></
+	          </div>
+	          <div class="form-group">
+	            <label for="password" class="control-label">Password:</label>
+	             <input type="password" class="form-control" id="password" placeholder="Password" name="password" >
+	          </div>
+	          <div class="form-group">
+	            <label for="email" class="control-label">Email :</label>
+	            <input type="text" class="form-control" id="email" name="email" placeholder="Email"  />
+	          </div>
+	          <div class="form-group">
+	            <label for="no_hp" class="control-label">No HP :</label>
+	            <input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="No HP"  /></
+	          </div>
+	      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+
+
+
+
+
+
+
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>
