@@ -13,12 +13,11 @@ including header content which is common for all pages
 
 <div>
 	<a href="/">
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 	 Home 
 	</button>
 	</a>
 	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">
 	 Add User
 	</button>
 	<!--  -->
@@ -26,14 +25,44 @@ including header content which is common for all pages
 
 <div class="table-responsive">
 <table class="table">          
-
 	<tr style='text-align:left; background-color:#CCC'>
+		<th>ID</th>
 		<th>Name</th>
-		<th>Age</th>
+		<th>Password</th>
 		<th>Email</th>
+		<th>No HP</th>
 		<th>Action</th>
 	</tr>
+
 	
+	<!--
+		Using FOREACH LOOP for the users array
+		
+		myArray.forEach(function(el, index) {
+			// el - current element, i - index
+		});
+	-->
+	
+	<% if (data) { %>
+	<% data.forEach(function(guest){ %>
+		<tr>
+			<td><%= guest.id_guest %></td>
+			<td><%= guest.name_guest %></td>
+			<td><%= guest.pass_guest %></td>
+			<td><%= guest.email_guest %></td>
+			<td><%= guest.no_hp_guest %></td>
+			<td>
+				<div style="float:left">
+					<a class="btn btn-warning" href='/guest_/edit/<%= guest.id_guest %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
+					<form method="post" action="/guest_/delete/<%= guest.id_guest %>"   style="float:right">					
+						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
+						<input type="hidden" name="_method" value="DELETE" />					
+					</form>
+				</div>
+			</td>
+		</tr>
+	<% }) %>
+	<% } %>
 
 </table>
 </div>
@@ -42,7 +71,7 @@ including header content which is common for all pages
 
 
 <!-- Modal Add user -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -77,9 +106,6 @@ including header content which is common for all pages
   </div>
 </div>
 <!--  -->
-
-
-
 
 
 

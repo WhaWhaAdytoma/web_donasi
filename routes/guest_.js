@@ -4,18 +4,18 @@ var app = express()
 // SHOW LIST OF GUEST
 app.get('/', function(req, res, next) {
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM guest ORDER BY id_guest DESC',function(err, rows, fields) {
+		conn.query('SELECT * FROM guest ORDER BY id_guest ASC',function(err, rows, fields) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
 				res.render('tampil/guest', {
-					title: 'User Guest List', 
+					title: 'User Guest ', 
 					data: ''
 				})
 			} else {
 				// render to views/guest.ejs template file
 				res.render('tampil/guest', {
-					title: 'User Guest List', 
+					title: 'User Guest ', 
 					data: rows
 				})
 			}
@@ -126,14 +126,14 @@ app.get('/edit/(:id)', function(req, res, next){
 			}
 			else { // if user found
 				// render to views/user/edit.ejs template file
-				res.render('tampil/guest', {
+				res.render('tampil/edit_guest', {
 					title: 'Edit User', 
 					//data: rows[0],
-					id: rows[0].id,
-					name: rows[0].name,
-					password: rows[0].password,
-					email: rows[0].email,
-					no_hp: rows[0].no_hp					
+					id: rows[0].id_guest,
+					name: rows[0].name_guest,
+					password: rows[0].pass_guest,
+					email: rows[0].email_guest,
+					no_hp: rows[0].no_hp_guest					
 				})
 			}			
 		})
@@ -145,7 +145,7 @@ app.put('/edit/(:id)', function(req, res, next) {
 	req.assert('name', 'Name is required').notEmpty()           //Validate name
 	req.assert('password', 'Password is required').notEmpty()             //Validate age
     req.assert('email', 'A valid email is required').isEmail()
-    req.assert('no_hp', 'A valid No HP is required').isEmail()  
+    req.assert('no_hp', 'A valid No HP is required').notEmpty()  
 
     var errors = req.validationErrors()
     
@@ -161,10 +161,10 @@ app.put('/edit/(:id)', function(req, res, next) {
 		req.sanitize('username').trim(); // returns 'a user'
 		********************************************/
 		var guest = {
-			name: req.sanitize('name').escape().trim(),
-			password: req.sanitize('password').escape().trim(),
-			email: req.sanitize('email').escape().trim(),
-			no_hp: req.sanitize('no_hp').escape().trim()
+			name_guest: req.sanitize('name').escape().trim(),
+			pass_guest: req.sanitize('password').escape().trim(),
+			email_guest: req.sanitize('email').escape().trim(),
+			no_hp_guest: req.sanitize('no_hp').escape().trim()
 		}
 		
 		req.getConnection(function(error, conn) {
@@ -174,8 +174,8 @@ app.put('/edit/(:id)', function(req, res, next) {
 					req.flash('error', err)
 					
 					// render to views/guest/add.ejs
-					res.render('tampil/guest', {
-						title: 'Edit User',
+					res.render('tampil/edit_guest', {
+						title: ' User Guets',
 						id: req.params.id,
 						name: req.body.name,
 						password: req.body.password,
@@ -186,8 +186,8 @@ app.put('/edit/(:id)', function(req, res, next) {
 					req.flash('success', 'Data updated successfully!')
 					
 					// render to views/user/add.ejs
-					res.render('tampil/guest', {
-						title: 'Edit User',
+					res.render('tampil/edit_guest', {
+						title: 'User Guest',
 						id: req.params.id,
 						name: req.body.name,
 						password: req.body.password,
@@ -209,8 +209,8 @@ app.put('/edit/(:id)', function(req, res, next) {
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */ 
-        res.render('tampil/guest', { 
-            title: 'Edit User',            
+        res.render('tampil/edit_guest', { 
+            title: 'User Guest',            
 			id: req.params.id, 
 			name: req.body.name,
 			password: req.body.password,
