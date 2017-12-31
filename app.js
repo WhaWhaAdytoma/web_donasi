@@ -26,13 +26,7 @@ var dbOptions = {
 app.use(myConnection(mysql, dbOptions, 'pool')) 
 app.set('view engine', 'ejs')
 
-/**
- * import routes/index.js
- * import routes/users.js
- */ 
-var index = require('./routes/index')
-var guest_ = require('./routes/guest_')
-var users = require('./routes/users')
+
 
 var expressValidator = require('express-validator')
 app.use(expressValidator())
@@ -84,12 +78,26 @@ app.use(session({
 app.use(flash())
 
 
+/**
+ * import routes/index.js
+ * import routes/users.js
+ */ 
+var index = require('./routes/index')
+var users = require('./routes/users')
+var admin_ = require('./routes/admin_')
+var guest_ = require('./routes/guest_')
+var campaign_ = require('./routes/campaign_')
+
+
 app.use('/', index)
 app.use('/users', users)
+app.use('/admin_', admin_)
 app.use('/guest_', guest_)
+app.use('/campaign_', campaign_)
 
 
 
-app.listen(3301, function(){
+
+app.listen(3220, function(){
 	console.log('Server running at port 3000: http://127.0.0.1:3000')
 })

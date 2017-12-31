@@ -1,21 +1,21 @@
 var express = require('express')
 var app = express()
 
-// SHOW LIST OF GUEST
+// SHOW LIST OF admin
 app.get('/', function(req, res, next) {
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM guest ORDER BY id_guest ASC',function(err, rows, fields) {
+		conn.query('SELECT * FROM admin ORDER BY id_admin ASC',function(err, rows, fields) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
-				res.render('tampil/guest', {
-					title: 'User Guest ', 
+				res.render('tampil/admin', {
+					title: ' Data Admin ', 
 					data: ''
 				})
 			} else {
-				// render to views/guest.ejs template file
-				res.render('tampil/guest', {
-					title: 'User Guest ', 
+				// render to views/admin.ejs template file
+				res.render('tampil/admin', {
+					title: ' Data Admin ', 
 					data: rows
 				})
 			}
@@ -23,11 +23,11 @@ app.get('/', function(req, res, next) {
 	})
 })
 
-// SHOW ADD USER FORM
+// SHOW ADD admin FORM
 app.get('/add', function(req, res, next){	
-	// render to views/user/add.ejs
-	res.render('tampil/guest', {
-		title: 'Add New User',
+	// render to views/admin/add.ejs
+	res.render('tampil/admin', {
+		title: 'Add New admin',
 		name: '',
 		password: '',
 		email: '',	
@@ -35,7 +35,7 @@ app.get('/add', function(req, res, next){
 	})
 })
 
-// ADD NEW USER POST ACTION
+// ADD NEW admin POST ACTION
 app.post('/add', function(req, res, next){	
 	req.assert('name', 'Name is required').notEmpty()           //Validate name
 	req.assert('password', 'Password is required').notEmpty()             //Validate age
@@ -50,37 +50,32 @@ app.post('/add', function(req, res, next){
 		 * Express-validator module
 		 
 		req.body.comment = 'a <span>comment</span>';
-		req.body.username = '   a user    ';
+		req.body.adminname = '   a admin    ';
 
 		req.sanitize('comment').escape(); // returns 'a &lt;span&gt;comment&lt;/span&gt;'
-		req.sanitize('username').trim(); // returns 'a user'
+		req.sanitize('adminname').trim(); // returns 'a admin'
 		********************************************/
-		var guest = {
-			name_guest: req.sanitize('name').escape().trim(),
-			pass_guest: req.sanitize('password').escape().trim(),
-			email_guest: req.sanitize('email').escape().trim(),
-			no_hp_guest: req.sanitize('no_hp').escape().trim()
+		var admin = {
+			name_admin: req.sanitize('name').escape().trim(),
+			pass_admin: req.sanitize('password').escape().trim(),
+			email_admin: req.sanitize('email').escape().trim(),
+			no_hp_admin: req.sanitize('no_hp').escape().trim()
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('INSERT INTO guest SET ?', guest, function(err, result) {
+			conn.query('INSERT INTO admin SET ?', admin, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
-					res.redirect('/guest_')
-					
-				
+					res.redirect('/admin_')
 				} else {				
-					req.flash('success', 'Data added successfully!')
-					res.redirect('/guest_')
-				
-
-					
+					req.flash('success', 'Data added successfully!')				
+				    res.redirect('/admin_')
 				}
 			})
 		})
 	}
-	else {   //Display errors to user
+	else {   //Display errors to admin
 		var error_msg = ''
 		errors.forEach(function(error) {
 			error_msg += error.msg + '<br>'
@@ -91,8 +86,8 @@ app.post('/add', function(req, res, next){
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */ 
-        res.render('tampil/guest', { 
-            title: 'Add New User',
+        res.render('tampil/admin', { 
+            title: 'Add New admin',
             name: req.body.name,
             password: req.body.password,
             email: req.body.email,
@@ -102,34 +97,34 @@ app.post('/add', function(req, res, next){
 })
 
 
-// SHOW EDIT USER FORM
+// SHOW EDIT admin FORM
 app.get('/edit/(:id)', function(req, res, next){
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM guest WHERE id_guest = ' + req.params.id, function(err, rows, fields) {
+		conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows, fields) {
 			if(err) throw err
 			
-			// if user not found
+			// if admin not found
 			if (rows.length <= 0) {
-				req.flash('error', 'User not found with id = ' + req.params.id)
-				res.redirect('/guest_')
+				req.flash('error', 'admin not found with id = ' + req.params.id)
+				res.redirect('/admin_')
 			}
-			else { // if user found
-				// render to views/user/edit.ejs template file
-				res.render('tampil/edit_guest', {
-					title: 'Edit User', 
+			else { // if admin found
+				// render to views/admin/edit.ejs template file
+				res.render('tampil/edit_admin', {
+					title: 'Edit admin', 
 					//data: rows[0],
-					id: rows[0].id_guest,
-					name: rows[0].name_guest,
-					password: rows[0].pass_guest,
-					email: rows[0].email_guest,
-					no_hp: rows[0].no_hp_guest					
+					id: rows[0].id_admin,
+					name: rows[0].name_admin,
+					password: rows[0].pass_admin,
+					email: rows[0].email_admin,
+					no_hp: rows[0].no_hp_admin					
 				})
 			}			
 		})
 	})
 })
 
-// EDIT USER POST ACTION
+// EDIT admin POST ACTION
 app.put('/edit/(:id)', function(req, res, next) {
 	req.assert('name', 'Name is required').notEmpty()           //Validate name
 	req.assert('password', 'Password is required').notEmpty()             //Validate age
@@ -144,27 +139,27 @@ app.put('/edit/(:id)', function(req, res, next) {
 		 * Express-validator module
 		 
 		req.body.comment = 'a <span>comment</span>';
-		req.body.username = '   a user    ';
+		req.body.adminname = '   a admin    ';
 
 		req.sanitize('comment').escape(); // returns 'a &lt;span&gt;comment&lt;/span&gt;'
-		req.sanitize('username').trim(); // returns 'a user'
+		req.sanitize('adminname').trim(); // returns 'a admin'
 		********************************************/
-		var guest = {
-			name_guest: req.sanitize('name').escape().trim(),
-			pass_guest: req.sanitize('password').escape().trim(),
-			email_guest: req.sanitize('email').escape().trim(),
-			no_hp_guest: req.sanitize('no_hp').escape().trim()
+		var admin = {
+			name_admin: req.sanitize('name').escape().trim(),
+			pass_admin: req.sanitize('password').escape().trim(),
+			email_admin: req.sanitize('email').escape().trim(),
+			no_hp_admin: req.sanitize('no_hp').escape().trim()
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('UPDATE guest SET ? WHERE id_guest = ' + req.params.id, guest, function(err, result) {
+			conn.query('UPDATE admin SET ? WHERE id_admin = ' + req.params.id, admin, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
 					
-					// render to views/guest/add.ejs
-					res.render('tampil/edit_guest', {
-						title: ' User Guets',
+					// render to views/admin/add.ejs
+					res.render('tampil/edit_admin', {
+						title: ' admin Guets',
 						id: req.params.id,
 						name: req.body.name,
 						password: req.body.password,
@@ -174,13 +169,13 @@ app.put('/edit/(:id)', function(req, res, next) {
 				} else {
 					req.flash('success', 'Data updated successfully!')
 					
-					// render to views/user/add.ejs
-					res.redirect('/guest_')
+					// render to views/admin/add.ejs
+					res.redirect('/admin_')
 				}
 			})
 		})
 	}
-	else {   //Display errors to user
+	else {   //Display errors to admin
 		var error_msg = ''
 		errors.forEach(function(error) {
 			error_msg += error.msg + '<br>'
@@ -191,8 +186,8 @@ app.put('/edit/(:id)', function(req, res, next) {
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */ 
-        res.render('tampil/edit_guest', { 
-            title: 'User Guest',            
+        res.render('tampil/edit_admin', { 
+            title: 'admin admin',            
 			id: req.params.id, 
 			name: req.body.name,
 			password: req.body.password,
@@ -202,21 +197,21 @@ app.put('/edit/(:id)', function(req, res, next) {
     }
 })
 
-// DELETE USER
+// DELETE admin
 app.delete('/delete/(:id)', function(req, res, next) {
-	var guest = { id: req.params.id }
+	var admin = { id: req.params.id }
 	
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM guest WHERE id_guest = ' + req.params.id, guest, function(err, result) {
+		conn.query('DELETE FROM admin WHERE id_admin = ' + req.params.id, admin, function(err, result) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
-				// redirect to users list page
-				res.redirect('/guest_')
+				// redirect to admins list page
+				res.redirect('/admin_')
 			} else {
-				req.flash('success', 'User deleted successfully! id = ' + req.params.id)
-				// redirect to users list page
-				res.redirect('/guest_')
+				req.flash('success', 'admin deleted successfully! id = ' + req.params.id)
+				// redirect to admins list page
+				res.redirect('/admin_')
 			}
 		})
 	})

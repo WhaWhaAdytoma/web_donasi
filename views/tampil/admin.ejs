@@ -18,7 +18,7 @@ including header content which is common for all pages
 	</a>
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">
-	 Add User
+	 Add Admin
 	</button>
 	<!--  -->
 </div>	
@@ -44,17 +44,17 @@ including header content which is common for all pages
 	-->
 	
 	<% if (data) { %>
-	<% data.forEach(function(guest){ %>
+	<% data.forEach(function(admin){ %>
 		<tr>
-			<td><%= guest.id_guest %></td>
-			<td><%= guest.name_guest %></td>
-			<td><%= guest.pass_guest %></td>
-			<td><%= guest.email_guest %></td>
-			<td><%= guest.no_hp_guest %></td>
+			<td><%= admin.id_admin %></td>
+			<td><%= admin.name_admin %></td>
+			<td><%= admin.pass_admin %></td>
+			<td><%= admin.email_admin %></td>
+			<td><%= admin.no_hp_admin %></td>
 			<td>
 				<div style="float:left">
-					<a class="btn btn-warning" href='/guest_/edit/<%= guest.id_guest %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
-					<form method="post" action="/guest_/delete/<%= guest.id_guest %>"   style="float:right">					
+					<a class="btn btn-warning" href='/admin_/edit/<%= admin.id_admin %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
+					<form method="post" action="/admin_/delete/<%= admin.id_admin %>"   style="float:right">					
 						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
 						<input type="hidden" name="_method" value="DELETE" />					
 					</form>
@@ -79,7 +79,7 @@ including header content which is common for all pages
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-         <form action="/guest_/add" method="post" name="form1">
+         <form action="/admin_/add" method="post" name="form1">
 	          <div class="form-group">
 	            <label for="nama" class="control-label">Nama :</label>
 	            <input type="text" class="form-control" name="name" id="name" placeholder="Nama"  /></
@@ -100,7 +100,7 @@ including header content which is common for all pages
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input type="submit" name="Submit" value="Save" class="btn btn-primary" /> 
+        <input type="submit" name="Submit" value="Save" class="btn btn-primary" />
       </div>
     </div>
   </div>
