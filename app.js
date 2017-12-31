@@ -31,7 +31,7 @@ app.set('view engine', 'ejs')
  * import routes/users.js
  */ 
 var index = require('./routes/index')
-var guest = require('./routes/guest')
+var guest_ = require('./routes/guest_')
 var users = require('./routes/users')
 
 var expressValidator = require('express-validator')
@@ -85,12 +85,11 @@ app.use(flash())
 
 
 app.use('/', index)
-
 app.use('/users', users)
-app.use('/guest', guest)
+app.use('/guest_', guest_)
 
 
 
-app.listen(3030, function(){
+app.listen(3222, function(){
 	console.log('Server running at port 3000: http://127.0.0.1:3000')
 })
