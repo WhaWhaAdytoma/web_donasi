@@ -185,15 +185,15 @@ app.put('/edit/(:id)', function(req, res, next) {
 					res.render('tampil/edit_campaign', {
 						title: ' campaign Guets',
 						id: req.params.id,
-						judul_cpg: req.params.judul_cpg,
-						desc_cpg: req.params.desc_cpg,
-						foto_cpg: req.params.foto_cpg,	
-						start_cpg: req.params.start_cpg,	
-						deadline_cpg: req.params.deadline_cpg,
-						target_cpg: req.params.target_cpg,	
-						income_cpg: req.params.income_cpg,
-						alamat: req.params.alamat,
-						kontak_dkm: req.params.kontak_dkm
+						judul_cpg: req.body.judul_cpg,
+						desc_cpg: req.body.desc_cpg,
+						foto_cpg: req.body.foto_cpg,	
+						start_cpg: req.body.start_cpg,	
+						deadline_cpg: req.body.deadline_cpg,
+						target_cpg: req.body.target_cpg,	
+						income_cpg: req.body.income_cpg,
+						alamat: req.body.alamat,
+						kontak_dkm: req.body.kontak_dkm
 						
 					})
 				} else {
@@ -219,15 +219,15 @@ app.put('/edit/(:id)', function(req, res, next) {
         res.render('tampil/edit_campaign', { 
             title: 'campaign campaign',            
 			id: req.params.id,
-			judul_cpg: req.params.judul_cpg,
-			desc_cpg: req.params.desc_cpg,
-			foto_cpg: req.params.foto_cpg,	
-			start_cpg: req.params.start_cpg,	
-			deadline_cpg: req.params.deadline_cpg,
-			target_cpg: req.params.target_cpg,	
-			income_cpg: req.params.income_cpg,
-			alamat: req.params.alamat,
-			kontak_dkm: req.params.kontak_dkm
+			judul_cpg: req.body.judul_cpg,
+			desc_cpg: req.body.desc_cpg,
+			foto_cpg: req.body.foto_cpg,	
+			start_cpg: req.body.start_cpg,	
+			deadline_cpg: req.body.deadline_cpg,
+			target_cpg: req.body.target_cpg,	
+			income_cpg: req.body.income_cpg,
+			alamat: req.body.alamat,
+			kontak_dkm: req.body.kontak_dkm
         })
     }
 })
