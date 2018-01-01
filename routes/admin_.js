@@ -87,7 +87,7 @@ app.post('/add', function(req, res, next){
 		 * because req.param('name') is deprecated
 		 */ 
         res.render('tampil/admin', { 
-            title: 'Add New admin',
+            title: ' Admin',
             name: req.body.name,
             password: req.body.password,
             email: req.body.email,

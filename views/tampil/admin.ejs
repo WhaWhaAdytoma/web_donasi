@@ -54,7 +54,7 @@ including header content which is common for all pages
 			<td>
 				<div style="float:left">
 					<a class="btn btn-warning" href='/admin_/edit/<%= admin.id_admin %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
-					<form method="post" action="/admin_/delete/<%= admin.id_admin %>"   style="float:right">					
+					<form method="post" action="/admin_/delete/<%= admin.id_admin %>"   style="float:right">	
 						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
 						<input type="hidden" name="_method" value="DELETE" />					
 					</form>
@@ -94,7 +94,7 @@ including header content which is common for all pages
 	          </div>
 	          <div class="form-group">
 	            <label for="no_hp" class="control-label">No HP :</label>
-	            <input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="No HP"  /></
+	            <input type="textarea" class="form-control" name="no_hp" id="no_hp" placeholder="No HP"  /></
 	          </div>
 	      </form>
       </div>

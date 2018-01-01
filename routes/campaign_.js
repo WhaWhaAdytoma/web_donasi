@@ -1,21 +1,21 @@
 var express = require('express')
 var app = express()
 
-// SHOW LIST OF admin
+// SHOW LIST OF campaign
 app.get('/', function(req, res, next) {
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM admin ORDER BY id_admin ASC',function(err, rows, fields) {
+		conn.query('SELECT * FROM campaign ORDER BY id_cpg ASC',function(err, rows, fields) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
-				res.render('tampil/admin', {
-					title: ' Data Admin ', 
+				res.render('tampil/campaign', {
+					title: ' Data campaign ', 
 					data: ''
 				})
 			} else {
-				// render to views/admin.ejs template file
-				res.render('tampil/admin', {
-					title: ' Data Admin ', 
+				// render to views/campaign.ejs template file
+				res.render('tampil/campaign', {
+					title: ' Data campaign ', 
 					data: rows
 				})
 			}
@@ -23,24 +23,37 @@ app.get('/', function(req, res, next) {
 	})
 })
 
-// SHOW ADD admin FORM
+
+
+// SHOW ADD campaign FORM
 app.get('/add', function(req, res, next){	
-	// render to views/admin/add.ejs
-	res.render('tampil/admin', {
-		title: 'Add New admin',
-		name: '',
-		password: '',
-		email: '',	
-		no_hp: ''	
+	// render to views/campaign/add.ejs
+	res.render('tampil/campaign', {
+		title: 'Add New campaign',
+		judul_cpg: '',
+		desc_cpg: '',
+		foto_cpg: '',	
+		start_cpg: '',	
+		deadline_cpg: '',
+		target_cpg: '',	
+		income_cpg: '',
+		alamat: '',
+		kontak_dkm: ''
+		
 	})
 })
 
-// ADD NEW admin POST ACTION
+// ADD NEW campaign POST ACTION
 app.post('/add', function(req, res, next){	
-	req.assert('name', 'Name is required').notEmpty()           //Validate name
-	req.assert('password', 'Password is required').notEmpty()             //Validate age
-    req.assert('email', 'A valid email is required').isEmail()  //Validate email
-    req.assert('no_hp', 'No Hp is required').notEmpty() 
+	req.assert('judul_cpg', 'judul_cpg is required').notEmpty()           
+	req.assert('desc_cpg', 'desc_cpg is required').notEmpty()            
+    req.assert('foto_cpg', 'foto_cpg is required').notEmpty()  
+    req.assert('start_cpg', 'start_cpg is required').notEmpty() 
+    req.assert('deadline_cpg', 'deadline_cpg is required').notEmpty()           
+	req.assert('target_cpg', 'target_cpg is required').notEmpty()            
+    req.assert('income_cpg', 'income_cpg is required').notEmpty()  
+    req.assert('alamat', 'alamat is required').notEmpty()
+    req.assert('kontak_dkm', 'kontak_dkm is required').notEmpty()
 
     var errors = req.validationErrors()
     
@@ -50,86 +63,92 @@ app.post('/add', function(req, res, next){
 		 * Express-validator module
 		 
 		req.body.comment = 'a <span>comment</span>';
-		req.body.adminname = '   a admin    ';
+		req.body.campaignname = '   a campaign    ';
 
 		req.sanitize('comment').escape(); // returns 'a &lt;span&gt;comment&lt;/span&gt;'
-		req.sanitize('adminname').trim(); // returns 'a admin'
+		req.sanitize('campaignname').trim(); // returns 'a campaign'
 		********************************************/
-		var admin = {
-			name_admin: req.sanitize('name').escape().trim(),
-			pass_admin: req.sanitize('password').escape().trim(),
-			email_admin: req.sanitize('email').escape().trim(),
-			no_hp_admin: req.sanitize('no_hp').escape().trim()
+		var campaign = {
+			judul_cpg: req.sanitize('judul_cpg').escape().trim(),
+			desc_cpg: req.sanitize('desc_cpg').escape().trim(),
+			foto_cpg: req.sanitize('foto_cpg').escape().trim(),	
+			start_cpg: req.sanitize('start_cpg').escape().trim(),	
+			deadline_cpg: req.sanitize('deadline_cpg').escape().trim(),
+			target_cpg: req.sanitize('target_cpg').escape().trim(),	
+			income_cpg: req.sanitize('income_cpg').escape().trim(),
+			alamat: req.sanitize('alamat').escape().trim(),
+			kontak_dkm: req.sanitize('kontak_dkm').escape().trim()
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('INSERT INTO admin SET ?', admin, function(err, result) {
+			conn.query('INSERT INTO campaign SET ?', campaign, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
-					res.redirect('/admin_')
+					res.redirect('/campaign_')
 				} else {				
 					req.flash('success', 'Data added successfully!')				
-				    res.redirect('/admin_')
+				    res.redirect('/campaign_')
 				}
 			})
 		})
 	}
-	else {   //Display errors to admin
+	else {   //Display errors to campaign
 		var error_msg = ''
 		errors.forEach(function(error) {
 			error_msg += error.msg + '<br>'
 		})				
 		req.flash('error', error_msg)		
+		 res.redirect('/campaign_')
 		
-		/**
-		 * Using req.body.name 
-		 * because req.param('name') is deprecated
-		 */ 
-        res.render('tampil/admin', { 
-            title: 'Add New admin',
-            name: req.body.name,
-            password: req.body.password,
-            email: req.body.email,
-            no_hp: req.body.no_hp
-        })
     }
 })
 
 
-// SHOW EDIT admin FORM
+// SHOW EDIT campaign FORM
 app.get('/edit/(:id)', function(req, res, next){
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows, fields) {
+		conn.query('SELECT * FROM campaign WHERE id_cpg = ' + req.params.id, function(err, rows, fields) {
 			if(err) throw err
 			
-			// if admin not found
+			// if campaign not found
 			if (rows.length <= 0) {
-				req.flash('error', 'admin not found with id = ' + req.params.id)
-				res.redirect('/admin_')
+				req.flash('error', 'campaign not found with id = ' + req.params.id)
+				res.redirect('/campaign_')
 			}
-			else { // if admin found
-				// render to views/admin/edit.ejs template file
-				res.render('tampil/edit_admin', {
-					title: 'Edit admin', 
+			else { // if campaign found
+				// render to views/campaign/edit.ejs template file
+				res.render('tampil/edit_campaign', {
+					title: 'Edit campaign', 
 					//data: rows[0],
-					id: rows[0].id_admin,
-					name: rows[0].name_admin,
-					password: rows[0].pass_admin,
-					email: rows[0].email_admin,
-					no_hp: rows[0].no_hp_admin					
+					id: rows[0].id_cpg,
+					judul_cpg: rows[0].judul_cpg,
+					desc_cpg: rows[0].desc_cpg,
+					foto_cpg: rows[0].foto_cpg,	
+					start_cpg: rows[0].start_cpg,	
+					deadline_cpg: rows[0].deadline_cpg,
+					target_cpg: rows[0].target_cpg,	
+					income_cpg: rows[0].income_cpg,
+					alamat: rows[0].alamat,
+					kontak_dkm: rows[0].kontak_dkm
+						
 				})
 			}			
 		})
 	})
 })
 
-// EDIT admin POST ACTION
+// EDIT campaign POST ACTION
 app.put('/edit/(:id)', function(req, res, next) {
-	req.assert('name', 'Name is required').notEmpty()           //Validate name
-	req.assert('password', 'Password is required').notEmpty()             //Validate age
-    req.assert('email', 'A valid email is required').isEmail()
-    req.assert('no_hp', 'A valid No HP is required').notEmpty()  
+	req.assert('judul_cpg', 'judul_cpg is required').notEmpty()           
+	req.assert('desc_cpg', 'desc_cpg is required').notEmpty()            
+    req.assert('foto_cpg', 'foto_cpg is required').notEmpty()  
+    req.assert('start_cpg', 'start_cpg is required').notEmpty() 
+    req.assert('deadline_cpg', 'deadline_cpg is required').notEmpty()           
+	req.assert('target_cpg', 'target_cpg is required').notEmpty()            
+    req.assert('income_cpg', 'income_cpg is required').notEmpty()  
+    req.assert('alamat', 'alamat is required').notEmpty()
+    req.assert('kontak_dkm', 'kontak_dkm is required').notEmpty() 
 
     var errors = req.validationErrors()
     
@@ -139,43 +158,54 @@ app.put('/edit/(:id)', function(req, res, next) {
 		 * Express-validator module
 		 
 		req.body.comment = 'a <span>comment</span>';
-		req.body.adminname = '   a admin    ';
+		req.body.campaignname = '   a campaign    ';
 
 		req.sanitize('comment').escape(); // returns 'a &lt;span&gt;comment&lt;/span&gt;'
-		req.sanitize('adminname').trim(); // returns 'a admin'
+		req.sanitize('campaignname').trim(); // returns 'a campaign'
 		********************************************/
-		var admin = {
-			name_admin: req.sanitize('name').escape().trim(),
-			pass_admin: req.sanitize('password').escape().trim(),
-			email_admin: req.sanitize('email').escape().trim(),
-			no_hp_admin: req.sanitize('no_hp').escape().trim()
+		var campaign = {
+			judul_cpg: req.sanitize('judul_cpg').escape().trim(),
+			desc_cpg: req.sanitize('desc_cpg').escape().trim(),
+			foto_cpg: req.sanitize('foto_cpg').escape().trim(),	
+			start_cpg: req.sanitize('start_cpg').escape().trim(),	
+			deadline_cpg: req.sanitize('deadline_cpg').escape().trim(),
+			target_cpg: req.sanitize('target_cpg').escape().trim(),	
+			income_cpg: req.sanitize('income_cpg').escape().trim(),
+			alamat: req.sanitize('alamat').escape().trim(),
+			kontak_dkm: req.sanitize('kontak_dkm').escape().trim()
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('UPDATE admin SET ? WHERE id_admin = ' + req.params.id, admin, function(err, result) {
+			conn.query('UPDATE campaign SET ? WHERE id_cpg = ' + req.params.id, campaign, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
 					
-					// render to views/admin/add.ejs
-					res.render('tampil/edit_admin', {
-						title: ' admin Guets',
+					// render to views/campaign/add.ejs
+					res.render('tampil/edit_campaign', {
+						title: ' campaign Guets',
 						id: req.params.id,
-						name: req.body.name,
-						password: req.body.password,
-						email: req.body.email,
-						no_hp: req.body.no_hp
+						judul_cpg: req.params.judul_cpg,
+						desc_cpg: req.params.desc_cpg,
+						foto_cpg: req.params.foto_cpg,	
+						start_cpg: req.params.start_cpg,	
+						deadline_cpg: req.params.deadline_cpg,
+						target_cpg: req.params.target_cpg,	
+						income_cpg: req.params.income_cpg,
+						alamat: req.params.alamat,
+						kontak_dkm: req.params.kontak_dkm
+						
 					})
 				} else {
 					req.flash('success', 'Data updated successfully!')
 					
-					// render to views/admin/add.ejs
-					res.redirect('/admin_')
+					// render to views/campaign/add.ejs
+					res.redirect('/campaign_')
 				}
 			})
 		})
 	}
-	else {   //Display errors to admin
+	else {   //Display errors to campaign
 		var error_msg = ''
 		errors.forEach(function(error) {
 			error_msg += error.msg + '<br>'
@@ -186,32 +216,37 @@ app.put('/edit/(:id)', function(req, res, next) {
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */ 
-        res.render('tampil/edit_admin', { 
-            title: 'admin admin',            
-			id: req.params.id, 
-			name: req.body.name,
-			password: req.body.password,
-			email: req.body.email,
-			no_hp: req.body.no_hp,
+        res.render('tampil/edit_campaign', { 
+            title: 'campaign campaign',            
+			id: req.params.id,
+			judul_cpg: req.params.judul_cpg,
+			desc_cpg: req.params.desc_cpg,
+			foto_cpg: req.params.foto_cpg,	
+			start_cpg: req.params.start_cpg,	
+			deadline_cpg: req.params.deadline_cpg,
+			target_cpg: req.params.target_cpg,	
+			income_cpg: req.params.income_cpg,
+			alamat: req.params.alamat,
+			kontak_dkm: req.params.kontak_dkm
         })
     }
 })
 
-// DELETE admin
+// DELETE campaign
 app.delete('/delete/(:id)', function(req, res, next) {
-	var admin = { id: req.params.id }
+	var campaign = { id: req.params.id }
 	
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM admin WHERE id_admin = ' + req.params.id, admin, function(err, result) {
+		conn.query('DELETE FROM campaign WHERE id_cpg = ' + req.params.id, campaign, function(err, result) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
-				// redirect to admins list page
-				res.redirect('/admin_')
+				// redirect to campaigns list page
+				res.redirect('/campaign_')
 			} else {
-				req.flash('success', 'admin deleted successfully! id = ' + req.params.id)
-				// redirect to admins list page
-				res.redirect('/admin_')
+				req.flash('success', 'campaign deleted successfully! id = ' + req.params.id)
+				// redirect to campaigns list page
+				res.redirect('/campaign_')
 			}
 		})
 	})
