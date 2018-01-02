@@ -1,0 +1,156 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../layouts/header.ejs %>
+
+<% if (messages.error) { %>
+	<p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+	<p style="color:green"><%- messages.success %></p>
+<% } %>	
+
+<div>
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">
+	 Add List Transaksi
+	</button>
+</div>	
+
+<div class="table-responsive">
+<table class="table">          
+	<tr style='text-align:left; background-color:#CCC'>
+		<th>ID Pembayaran </th>
+		<th>ID Donasi </th>
+		<th>Nama Donatur</th>
+		<th>Email Donatur</th>
+		<th>No HP Donatur</th>
+		<th>ID Rek. Tujuan</th>
+		<th>Rek. Donatur</th>
+		<th>Jumlah Donasi</th>
+		<th>Tanggal</th>
+	</tr>
+
+
+id_bayar
+id_donasi
+nama_donatur
+email_donatur
+no_hp_donatur
+id_rek_tujuan
+rek_donatur
+jum_donasi
+tanggal
+
+
+	<!--
+		Using FOREACH LOOP for the users array
+		
+		myArray.forEach(function(el, index) {
+			// el - current element, i - index
+		});
+	-->
+
+	<% if (data) { %>
+	<% data.forEach(function(a){ %>
+		<tr>
+			<td><%= a.id_bayar %></td>
+			<td><%= a.id_donasi %></td>
+			<td><%= a.nama_donatur %></td>
+			<td><%= a.email_donatur %></td>
+			<td><%= a.no_hp_donatur %></td>
+			<td><%= a.id_rek_tujuan %></td>
+			<td><%= a.rek_donatur %></td>
+			<td><%= a.jum_donasi %></td>
+			<td><%= a.tanggal %></td>
+			<td>
+				<div style="float:left">
+					<a class="btn btn-warning" href='/rek_/edit/<%= a.id_bayar %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
+					<form method="post" action="/rek_/delete/<%= a.id_bayar %>"   style="float:right">	
+						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
+						<input type="hidden" name="_method" value="DELETE" />					
+					</form>
+				</div>
+			</td>
+		</tr>
+	<% }) %>
+	<% } %>
+
+</table>
+</div>
+
+
+
+id_bayar
+id_donasi
+nama_donatur
+email_donatur
+no_hp_donatur
+id_rek_tujuan
+rek_donatur
+jum_donasi
+tanggal
+
+<!-- Modal Add user -->
+<div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+         <form action="/rek_/add" method="post" name="form1">
+	          <div class="form-group">
+	            <label for="id_donasi" class="control-label">ID Donasi :</label>
+	            <input type="text" class="form-control" name="id_donasi" id="id_donasi" placeholder="ID Donasi"  /></
+	          </div>
+	          <div class="form-group">
+	            <label for="nama_donatur" class="control-label">Nama Donatur:</label>
+	             <input type="text" class="form-control" id="nama_donatur" placeholder="Nama Donatur" name="nama_donatur" ></
+	          </div>
+	          <div class="form-group">
+	            <label for="email_donatur" class="control-label">Email Donatur :</label>
+	            <input type="text" class="form-control" name="email_donatur" id="email_donatur" placeholder="Email Donatur"/></
+	          </div>
+	           <div class="form-group">
+	            <label for="no_hp_donatur" class="control-label">No Hp Donatur:</label>
+	             <input type="text" class="form-control" id="no_hp_donatur" placeholder="No Hp" name="no_hp_donatur" ></
+	          </div>
+	          <div class="form-group">
+	            <label for="id_rek_tujuan" class="control-label">Id Rek Tujuan :</label>
+	            	<select name="id_rek_tujuan" id="id_rek_tujuan" class="vfb-select  vfb-medium  required ">
+				 		<option value="1">BRI Syariah 105 79 35 628</option>
+				 		<option value="2">Mandiri Syariah 706 6116 561</option>
+				   </select></
+	          </div>
+	          <div class="form-group">
+	            <label for="rek_donatur" class="control-label">No Rekening Donatur :</label>
+	            <input type="text" class="form-control" name="rek_donatur" id="rek_donatur" placeholder="No Rekening Donatur"/></
+	          </div>
+	           <div class="form-group">
+	            <label for="jum_donasi" class="control-label">Jumlah Donasi:</label>
+	             <input type="text" class="form-control" id="jum_donasi" placeholder="nominal donasi" name="jum_donasi" ></
+	          </div>
+	          <div class="form-group">
+	            <label for="tanggal" class="control-label">Tanggal :</label>
+	            <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"/></
+	          </div>
+	      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input type="submit" name="Submit" value="Save" class="btn btn-primary" />
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+
+
+
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>

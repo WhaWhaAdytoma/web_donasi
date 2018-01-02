@@ -12,23 +12,18 @@ including header content which is common for all pages
 <% } %>	
 
 <div>
-	
-	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">
-	 Add User
+	 Add Rekening
 	</button>
-	<!--  -->
 </div>	
 
 <div class="table-responsive">
 <table class="table">          
 	<tr style='text-align:left; background-color:#CCC'>
-		<th>ID</th>
-		<th>Name</th>
-		<th>Password</th>
-		<th>Email</th>
-		<th>No HP</th>
-		<th>Action</th>
+		<th>ID Rekening </th>
+		<th>Nama Bank</th>
+		<th>Nama Rekening</th>
+		<th>No rekening</th>
 	</tr>
 
 	
@@ -39,19 +34,18 @@ including header content which is common for all pages
 			// el - current element, i - index
 		});
 	-->
-	
+
 	<% if (data) { %>
-	<% data.forEach(function(guest){ %>
+	<% data.forEach(function(rek){ %>
 		<tr>
-			<td><%= guest.id_guest %></td>
-			<td><%= guest.name_guest %></td>
-			<td><%= guest.pass_guest %></td>
-			<td><%= guest.email_guest %></td>
-			<td><%= guest.no_hp_guest %></td>
+			<td><%= rek.id_rek_tujuan %></td>
+			<td><%= rek.nama_bank %></td>
+			<td><%= rek.nama_rek %></td>
+			<td><%= rek.no_rek %></td>
 			<td>
 				<div style="float:left">
-					<a class="btn btn-warning" href='/guest_/edit/<%= guest.id_guest %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
-					<form method="post" action="/guest_/delete/<%= guest.id_guest %>"   style="float:right">					
+					<a class="btn btn-warning" href='/rek_/edit/<%= rek.id_rek_tujuan %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
+					<form method="post" action="/rek_/delete/<%= rek.id_rek_tujuan %>"   style="float:right">	
 						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
 						<input type="hidden" name="_method" value="DELETE" />					
 					</form>
@@ -76,28 +70,24 @@ including header content which is common for all pages
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-         <form action="/guest_/add" method="post" name="form1">
+         <form action="/rek_/add" method="post" name="form1">
 	          <div class="form-group">
-	            <label for="nama" class="control-label">Nama :</label>
-	            <input type="text" class="form-control" name="name" id="name" placeholder="Nama"  /></
+	            <label for="nama_bank" class="control-label">Nama Bank :</label>
+	            <input type="text" class="form-control" name="nama_bank" id="nama_bank" placeholder="Nama Bank"  /></
 	          </div>
 	          <div class="form-group">
-	            <label for="password" class="control-label">Password:</label>
-	             <input type="password" class="form-control" id="password" placeholder="Password" name="password" >
+	            <label for="nama_rek" class="control-label">Nama Rekening:</label>
+	             <input type="nama_rek" class="form-control" id="nama_rek" placeholder="Nama Rekening" name="nama_rek" ></
 	          </div>
 	          <div class="form-group">
-	            <label for="email" class="control-label">Email :</label>
-	            <input type="text" class="form-control" id="email" name="email" placeholder="Email"  />
-	          </div>
-	          <div class="form-group">
-	            <label for="no_hp" class="control-label">No HP :</label>
-	            <input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="No HP"  /></
+	            <label for="no_rek" class="control-label">No Rekening :</label>
+	            <input type="text" class="form-control" name="no_rek" id="no_rek" placeholder="No Rekening"/></
 	          </div>
 	      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input type="submit" name="Submit" value="Save" class="btn btn-primary" /> 
+        <input type="submit" name="Submit" value="Save" class="btn btn-primary" />
       </div>
     </div>
   </div>
