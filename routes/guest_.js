@@ -197,7 +197,7 @@ app.put('/edit/(:id)', function(req, res, next) {
 			name: req.body.name,
 			password: req.body.password,
 			email: req.body.email,
-			no_hp: req.body.no_hp,
+			no_hp: req.body.no_hp
         })
     }
 })
