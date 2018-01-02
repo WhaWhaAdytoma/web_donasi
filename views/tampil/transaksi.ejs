@@ -21,6 +21,7 @@ including header content which is common for all pages
 <table class="table">          
 	<tr style='text-align:left; background-color:#CCC'>
 		<th>ID Donasi </th>
+		<th>ID Campaign </th>
 		<th>ID Rekening Tujuan</th>
 		<th>Jumlah Donasi</th>
 		<th>Tanggal</th>
@@ -38,6 +39,7 @@ including header content which is common for all pages
 	<% data.forEach(function(a){ %>
 		<tr>
 			<td><%= a.id_donasi %></td>
+			<td><%= a.id_cpg %></td>
 			<td><%= a.id_rek_tujuan %></td>
 			<td><%= a.jum_donasi %></td>
 			<td><%= a.tanggal %></td>
@@ -70,6 +72,10 @@ including header content which is common for all pages
       </div>
       <div class="modal-body">
          <form action="/rek_/add" method="post" name="form1">
+         	 <div class="form-group">
+	            <label for="id_cpg" class="control-label">ID campaignn:</label>
+	             <input type="text" class="form-control" id="id_cpg" placeholder="ID campaign" name="id_cpg" ></
+	          </div>
 	          <div class="form-group">
 	            <label for="id_rek_tujuan" class="control-label">Rek. Tujuan : <span class="vfb-required-asterisk"> </span></label>
 				 	<select name="id_rek_tujuan" id="id_rek_tujuan" class="vfb-select  vfb-medium  required ">
