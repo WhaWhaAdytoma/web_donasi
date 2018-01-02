@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>WEBDONASI</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      .bor {
+        border:1px solid black;
+        height: 500px;
+      }
+
+    #nav li.active a {
+      background-color: #32CD32  ;
+    }
+    .navbar-inverse {
+      background-color: #228B22 ;
+      font-size:18px;
+    }
+</style>
+<nav class="navbar navbar-inverse">
+        <header id="header" class="navbar navbar-inverse navbar-fixed-top" role="banner">
+          <div class="container" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html">WEBDONASI</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav" ></ul>
+
+              <ul id="nav" class="nav navbar-nav navbar-right" style="color : white">
+                <li><a href="index.html">Beranda</a></li>
+                <li class="dropdown">
+                  <a href="#dropdown-menu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Program <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="campaign.html">Campaign</a></li>
+                    <li><a href="daftarcampaign.html">Daftar Campaign</a></li>
+                    <li class="active"><a href="donate.html">Donate</a></li>
+                    <li><a href="login.html">Login</a></li>
+                  </ul>
+                </li>
+                <li><a href="about.html">About Us</a></li>
+                <form class="navbar-form navbar-right">
+                <div class="form-group">
+                  <input type="text" style="width: 200px; background:#000;opacity:0.4;filter:alpha(opacity=40);" class="form-control" placeholder="Search" >
+                </div>
+              </form>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+          </header>
+        </nav>
+  </head>
+
+  <body style="background : #90EE90">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="maintitle">
+          <p class="lead">
+            
+          </p>
+        </div>
+        <form class="form-signin" id="login" method="POST" action="act.php">
+        <input  type="hidden" name="act" value="login">
+        <h2 class="form-donate" text-align="center">Donate</h2>
+        <input style="margin-top : 5px;" type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+        <input style="margin-top : 5px;" type="text" id="judulCampaign" name="judul" class="form-control" placeholder="Judul Campaign" required>
+        <input style="margin-top : 5px;" type="text" id="deskripsicam" name="deskripsi" class="form-control" placeholder="Deskripsi Campaign" required>
+        
+        <button style="margin-top : 5px;" type="submit" class="btn btn-success btn-default pull-left"><span class="glyphicon glyphicon-off"></span> Daftar</button>
+        <button style="margin-top : 5px; margin-left:5px" type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        <p style="text-align:right; margin-top : 10px;">Not a member? <a href="#" >Sign Up</a></p>
+          <p style="text-align:right; margin-top : 5px;">Forgot <a href="#">Password?</a></p>
+      </form>
+      <!-- 
+       <div id="success">    
+          <p class="contactalert">
+            Your message was sent succssfully! I will be in touch as soon as I can.
+          </p>      
+        </div>
+        <div id="error">      
+          <p class="contactalert">
+             Something went wrong, try refreshing and submitting the form again.
+          </p>      
+        </div>
+
+       -->
+       
+      </div>
+    </div>
+  </div>
+
+
+  
+    <section id="credits" class="text-center">
+  <span class="social wow zoomIn">
+  <a href="#"><img src="image/f.png"></a>
+  <a href="#"><img src="image/t.png"></a>
+  <a href="#"><img src="image/ig.png"></a>
+  <a href="#"><img src="image/inn.png"></a>
+  </span><br/>Copyright &copy; WEBDONASI</a> 
+  <br/>
+</section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>WEBDONASI</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+     .bor {
+        background-color: #228B22 ;
+        height: 500px;
+      }
+        #nav li.active a {
+      background-color: #32CD32  ;
+    }
+    .navbar-inverse {
+      background-color: #228B22 ;
+      font-size:18px;
+
+    }
+</style>
+ <nav class="navbar navbar-inverse">
+        <header id="header" class="navbar navbar-inverse navbar-fixed-top" role="banner">
+          <div class="container" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html">WEBDONASI</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav" ></ul>
+
+              <ul id="nav" class="nav navbar-nav navbar-right" style="color : white">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="campaign.html">Program</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="login.html">Login</a></li>
+                <form class="navbar-form navbar-right">
+                <div class="form-group">
+                  <input type="text" style="width: 200px; background:#000;opacity:0.4;filter:alpha(opacity=40);" class="form-control" placeholder="Search" >
+                </div>
+              </form>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+          </header>
+        </nav>
+  </head>
+
+  <body >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+      <div class="col-md-7 col-xs-7" style="height: 700px">
+        <img src="image/don1.jpg" style="height: 70%; width: 100%; margin-top:25px;" class="image-responsive">
+        <p style="text-align:justify; margin-top:20px;">
+            Adalah masyarakat Desa Dedeta Kecamatan Loloda Kepulauan Kabupaten Halmahera Utara Provinsi Maluku Utara. Tinggal di daerah 3T (Terpencil, Terluar dan Terdepan) di Indonesia menjadikan masyarakat umum kurang mengenali daerah kami. Selain karena jarak yang jauh dari hingar bingar perkotaan, kami juga terpisah-pisah dengan penduduk lainnya. Ya, kami masyarakat kepulauan yang jika ingin melihat ibu kota kabupaten saja harus menempuh 1 hari perjalanan menggunakan kapal kayu.
+            Halmahera Utara di dominasi oleh nasrani, pembangunan gereja sangat masif. Tapi, bagaimana dengan nasib mesjid kami? Sejak 2007 masyarakat sudah mencoba berswadaya untuk membangun meajid berukuran sekitar 10 x 15 m ini.
+            Tapi apa daya, sebagian besar mata pencaharian kami hanya nelayan dan petani yang cukup untuk menghidupi keluarga dan anak sekolah sehari-hari. Mesjid Nurul Mubin bukan hanya digunakan untuk sholat 5 waktu semata, seringkali kegiatan anak-anak mengaji dan khatam quran dilakukan disini.
+            Sekian lama, kami ingin mesjid ini segera dibangun dengan lebih baik. Karena bagi kami, mesjid adalah ruh dan gambaran kehidupan. Semoga dengan dibangunnya mesjid Nuril Mubin, kehidupan kami juga akan lebih baik dan lebih madani.
+
+            Itulan penuturan Ust. Sarif Hi. Keper (Ketua DKM Masjid NUrul Mubin).
+          </p>
+      </div>
+      <div class="col-md-1 col-xs-1" style="height: 700px"></div>
+      <div class="col-md-4 col-xs-4" style="height: 700px">
+      <H1>Membangun Masjid Pertama di Halmahera Utara</H1>
+      <h2>Rp 60.090.698</h2>
+      <h4>terkumpul dari target Rp 100.000.000</h4>
+      <div class="progress">
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">60%</div>
+      </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success btn-default" style="width:100%" data-toggle="modal" data-target="#myModal">Donate</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Donate</h4>
+              </div>
+              <div class="modal-body">
+                <input style="margin-top : 5px;" type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+                <input style="margin-top : 5px;" type="text" id="nominal" name="judul" class="form-control" placeholder="Nominal Donasi" required>
+                <input style="margin-top : 5px;" type="text" id="telp" name="notelp" class="form-control" placeholder="Nomor Telepon" required>
+                <label style="margin-top : 5px;">Metode Pembayaran</label>
+                <select style="margin-top : 5px;">
+                  <option value="bca">Transfer BCA</option>
+                  <option value="bni">Transfer BNI</option>
+                  <option value="bri">Transfer BRI</option>
+                  <option value="brisya">Transfer BRI Syariah</option>
+                  <option value="mandiri">Transfer Mandiri</option>
+                  <option value="mandirisya">Transfer Mandiri Syariah</option>
+                </select>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="remember-me" required> Saya mempercayai dan setuju dengan Syarat & Ketentuan Donasi di WEBDONASI
+                  </label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Donate</button>
+              </div>
+            </div>
+          </div> 
+        </div>
+        <!-- END MODAL -->
+
+      </div>
+      </div>
+    </div>
+    <!-- KOLOM DESKRIPSI -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-md-8 col-xs-8" style="height: 200px">
+        
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+    <section id="footer" class="text-center">
+  <span class="social wow zoomIn">
+  <a href="#"><img src="image/f.png"></a>
+  <a href="#"><img src="image/t.png"></a>
+  <a href="#"><img src="image/ig.png"></a>
+  <a href="#"><img src="image/inn.png"></a>
+  </span><br/>Copyright &copy; WEBDONASI</a> 
+  <br/>
+</section>
+</html>
