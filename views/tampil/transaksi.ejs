@@ -1,6 +1,9 @@
 <!--
 including header content which is common for all pages
 -->
+
+<!-- LIST DONATUR YANG BERENCANA DONASI(BLM KONFORMASI BAYAR) -->
+
 <%- include ../layouts/header.ejs %>
 
 <% if (messages.error) { %>
@@ -10,6 +13,16 @@ including header content which is common for all pages
 <% if (messages.success) { %>
 	<p style="color:green"><%- messages.success %></p>
 <% } %>	
+
+<div style="text-align: center; ">
+	<h1>List Donatur </h1>
+</div>
+<div><h3>
+		    <a href="/rekening_"> Rekening</a> | 
+		    <a href="/pre_transaksi_">List Donatur [Pre Donate]</a> | 
+			<a href="/konfirmasi_bayar_">Konfirmasi Bayar</a> | 
+	</h>
+</div>
 
 <div>
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">
@@ -25,6 +38,7 @@ including header content which is common for all pages
 		<th>ID Rekening Tujuan</th>
 		<th>Jumlah Donasi</th>
 		<th>Tanggal</th>
+		<th>Action</th>
 	</tr>
 
 	<!--
@@ -71,7 +85,7 @@ including header content which is common for all pages
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-         <form action="/rek_/add" method="post" name="form1">
+         <form action="/pre_transaksi_/add" method="post" name="form1">
          	 <div class="form-group">
 	            <label for="id_cpg" class="control-label">ID campaignn:</label>
 	             <input type="text" class="form-control" id="id_cpg" placeholder="ID campaign" name="id_cpg" ></

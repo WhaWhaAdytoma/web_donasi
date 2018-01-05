@@ -1,0 +1,34 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../layouts/header.ejs %>
+
+<% if (messages.error) { %>
+	<p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+	<p style="color:green"><%- messages.success %></p>
+<% } %>	
+
+<!-- Modal Edit user -->
+
+         <form action="/rekening_/edit/<%= id %>" method="post" name="form1">
+	         <div class="form-group">
+	            <label for="nama_bank" class="control-label">Nama Bank :</label>
+	            <input type="text" class="form-control" name="nama_bank" id="nama_bank" placeholder="Nama Bank"  /></
+	          </div>
+	          <div class="form-group">
+	            <label for="nama_rek" class="control-label">Nama Rekening:</label>
+	             <input type="nama_rek" class="form-control" id="nama_rek" placeholder="Nama Rekening" name="nama_rek" ></
+	          </div>
+	          <div class="form-group">
+	            <label for="no_rek" class="control-label">No Rekening :</label>
+	            <input type="text" class="form-control" name="no_rek" id="no_rek" placeholder="No Rekening"/></
+	          </div>
+	      
+        <input type="submit" name="Submit" value="Save Change" class="btn btn-primary"/>
+        <input type="hidden" name="_method" value="PUT" />
+ </form>
+
+ 

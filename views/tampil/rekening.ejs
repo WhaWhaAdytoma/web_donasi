@@ -11,6 +11,16 @@ including header content which is common for all pages
 	<p style="color:green"><%- messages.success %></p>
 <% } %>	
 
+<div style="text-align: center;">
+	<h1>Rekening Masjid Muslim</h1>
+</div>
+<div><h3>  
+		<a href="/rekening_"> Rekening</a> | 
+		<a href="/pre_transaksi_">List Donatur [Pre Donate]</a> | 
+	    <a href="/konfirmasi_bayar_">Konfirmasi Bayar</a> | 
+	</h3>
+</div>
+
 <div>
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">
 	 Add Rekening
@@ -24,6 +34,7 @@ including header content which is common for all pages
 		<th>Nama Bank</th>
 		<th>Nama Rekening</th>
 		<th>No rekening</th>
+		<th>Action</th>
 	</tr>
 
 	
@@ -70,7 +81,7 @@ including header content which is common for all pages
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-         <form action="/rek_/add" method="post" name="form1">
+         <form action="/rekening_/add" method="post" name="form1">
 	          <div class="form-group">
 	            <label for="nama_bank" class="control-label">Nama Bank :</label>
 	            <input type="text" class="form-control" name="nama_bank" id="nama_bank" placeholder="Nama Bank"  /></

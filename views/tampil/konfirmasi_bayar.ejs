@@ -11,9 +11,19 @@ including header content which is common for all pages
 	<p style="color:green"><%- messages.success %></p>
 <% } %>	
 
+<div style="text-align: center;">
+	<h1> Konfirmasi Bayar </h1>
+</div>
+<div><h3>
+		    <a href="/rekening_"> Rekening</a> | 
+		    <a href="/pre_transaksi_">List Donatur [Pre Donate]</a> | 
+			<a href="/konfirmasi_bayar_">Konfirmasi Bayar</a> | 
+	</h3>
+</div>
+
 <div>
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAdd">
-	 Add List Transaksi
+	 Add Konfirmasi Bayar
 	</button>
 </div>	
 
@@ -29,6 +39,7 @@ including header content which is common for all pages
 		<th>Rek. Donatur</th>
 		<th>Jumlah Donasi</th>
 		<th>Tanggal</th>
+		<th>Action</th>
 	</tr>
 
 
@@ -72,16 +83,6 @@ including header content which is common for all pages
 
 
 
-id_bayar
-id_donasi
-nama_donatur
-email_donatur
-no_hp_donatur
-id_rek_tujuan
-rek_donatur
-jum_donasi
-tanggal
-
 <!-- Modal Add user -->
 <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -91,7 +92,7 @@ tanggal
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-         <form action="/rek_/add" method="post" name="form1">
+         <form action="/konfirmasi_bayar_/add" method="post" name="form1">
 	          <div class="form-group">
 	            <label for="id_donasi" class="control-label">ID Donasi :</label>
 	            <input type="text" class="form-control" name="id_donasi" id="id_donasi" placeholder="ID Donasi"  /></

@@ -87,6 +87,10 @@ var users = require('./routes/users')
 var admin_ = require('./routes/admin_')
 var guest_ = require('./routes/guest_')
 var campaign_ = require('./routes/campaign_')
+var rekening_ = require('./routes/rekening_')
+var pre_transaksi_ = require('./routes/pre_transaksi_')
+var konfirmasi_bayar_ = require('./routes/konfirmasi_bayar_')
+
 
 
 app.use('/', index)
@@ -94,10 +98,13 @@ app.use('/users', users)
 app.use('/admin_', admin_)
 app.use('/guest_', guest_)
 app.use('/campaign_', campaign_)
+app.use('/rekening_', rekening_)
+app.use('/pre_transaksi_', pre_transaksi_)
+app.use('/konfirmasi_bayar_', konfirmasi_bayar_)
 
 
 
 
-app.listen(3066, function(){
+app.listen(3300, function(){
 	console.log('Server running at port 3000: http://127.0.0.1:3000')
 })

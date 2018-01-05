@@ -1,0 +1,56 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../layouts/header.ejs %>
+
+<% if (messages.error) { %>
+	<p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+	<p style="color:green"><%- messages.success %></p>
+<% } %>	
+
+<!-- Modal Edit user -->
+
+         <form action="/konfirmasi_bayar_/edit/<%= id %>" method="post" name="form1">
+	          <div class="form-group">
+	            <label for="id_donasi" class="control-label">ID Donasi :</label>
+	            <input type="text" class="form-control" name="id_donasi" id="id_donasi" placeholder="ID Donasi"  /></
+	          </div>
+	          <div class="form-group">
+	            <label for="nama_donatur" class="control-label">Nama Donatur:</label>
+	             <input type="text" class="form-control" id="nama_donatur" placeholder="Nama Donatur" name="nama_donatur" ></
+	          </div>
+	          <div class="form-group">
+	            <label for="email_donatur" class="control-label">Email Donatur :</label>
+	            <input type="text" class="form-control" name="email_donatur" id="email_donatur" placeholder="Email Donatur"/></
+	          </div>
+	           <div class="form-group">
+	            <label for="no_hp_donatur" class="control-label">No Hp Donatur:</label>
+	             <input type="text" class="form-control" id="no_hp_donatur" placeholder="No Hp" name="no_hp_donatur" ></
+	          </div>
+	          <div class="form-group">
+	            <label for="id_rek_tujuan" class="control-label">Id Rek Tujuan :</label>
+	            	<select name="id_rek_tujuan" id="id_rek_tujuan" class="vfb-select  vfb-medium  required ">
+				 		<option value="1">BRI Syariah 105 79 35 628</option>
+				 		<option value="2">Mandiri Syariah 706 6116 561</option>
+				   </select></
+	          </div>
+	          <div class="form-group">
+	            <label for="rek_donatur" class="control-label">No Rekening Donatur :</label>
+	            <input type="text" class="form-control" name="rek_donatur" id="rek_donatur" placeholder="No Rekening Donatur"/></
+	          </div>
+	           <div class="form-group">
+	            <label for="jum_donasi" class="control-label">Jumlah Donasi:</label>
+	             <input type="text" class="form-control" id="jum_donasi" placeholder="nominal donasi" name="jum_donasi" ></
+	          </div>
+	          <div class="form-group">
+	            <label for="tanggal" class="control-label">Tanggal :</label>
+	            <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"/></
+	          </div>
+        <input type="submit" name="Submit" value="Save Change" class="btn btn-primary"/>
+        <input type="hidden" name="_method" value="PUT" />
+ </form>
+
+ 

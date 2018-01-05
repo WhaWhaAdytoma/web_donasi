@@ -4,7 +4,7 @@ var app = express()
 // SHOW LIST OF konfirmasi_bayar
 app.get('/', function(req, res, next) {
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM konfirmasi_bayar ORDER BY id_konfirmasi_bayar ASC',function(err, rows, fields) {
+		conn.query('SELECT * FROM konfirmasi_bayar ORDER BY id_bayar ASC',function(err, rows, fields) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
@@ -96,7 +96,7 @@ app.post('/add', function(req, res, next){
 // SHOW EDIT   FORM
 app.get('/edit/(:id)', function(req, res, next){
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM konfirmasi_bayar WHERE id_konfirmasi_bayar = ' + req.params.id, function(err, rows, fields) {
+		conn.query('SELECT * FROM konfirmasi_bayar WHERE id_bayar = ' + req.params.id, function(err, rows, fields) {
 			if(err) throw err
 			
 			// if   not found
@@ -160,7 +160,7 @@ app.put('/edit/(:id)', function(req, res, next) {
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('UPDATE konfirmasi_bayar SET ? WHERE id_konfirmasi_bayar = ' + req.params.id, konfirmasi_bayar, function(err, result) {
+			conn.query('UPDATE konfirmasi_bayar SET ? WHERE id_bayar = ' + req.params.id, konfirmasi_bayar, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
@@ -218,7 +218,7 @@ app.delete('/delete/(:id)', function(req, res, next) {
 	var konfirmasi_bayar = { id: req.params.id }
 	
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM konfirmasi_bayar WHERE id_konfirmasi_bayar = ' + req.params.id, konfirmasi_bayar, function(err, result) {
+		conn.query('DELETE FROM konfirmasi_bayar WHERE id_bayar = ' + req.params.id, konfirmasi_bayar, function(err, result) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
