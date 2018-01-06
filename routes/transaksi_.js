@@ -102,7 +102,7 @@ app.post('/add', function(req, res, next){
 app.get('/edit/(:id)', function(req, res, next){
 	req.getConnection(function(error, conn) {
 		conn.query('SELECT * FROM transaksi WHERE id_donasi = ' + req.params.id, function(err, rows, fields) {
-			if(err) throw err
+			//if(err) throw err
 			
 			// if Transaksi not found
 			if (rows.length <= 0) {

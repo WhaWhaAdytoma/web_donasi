@@ -90,7 +90,7 @@ var campaign_ = require('./routes/campaign_')
 var rekening_ = require('./routes/rekening_')
 var pre_transaksi_ = require('./routes/pre_transaksi_')
 var konfirmasi_bayar_ = require('./routes/konfirmasi_bayar_')
-
+var campaign1_ = require('./routes/campaign1_')
 
 
 app.use('/', index)
@@ -102,7 +102,8 @@ app.use('/rekening_', rekening_)
 app.use('/pre_transaksi_', pre_transaksi_)
 app.use('/konfirmasi_bayar_', konfirmasi_bayar_)
 
-
+//view user guest
+app.use('/campaign1_', campaign1_)
 
 
 app.listen(3300, function(){
