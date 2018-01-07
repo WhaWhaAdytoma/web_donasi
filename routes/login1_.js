@@ -631,13 +631,23 @@ app.post('/add', function(req, res, next){
 										 if(rows.length >0){
 										 	//cek password
 										      if(rows[0].pass_admin == password){
-										            res.redirect('/admin_')
+										      	
+										      	   res.render('layouts/header', {
+															title: 'Masjid Muslim-Halaman Admin', 
+															//data: rows[0],
+															id_admin: rows[0].id_admin,
+															name_admin: rows[0].name_admin,
+															pass_admin: rows[0].pass_admin,
+															email_admin: rows[0].email_admin,
+															no_hp_admin: rows[0].no_hp_admin					
+													})
+										            
 										      }
 										      else{
 										        
 										            var error_msg = 'Email and Password does not match'
 										        	req.flash('error', error_msg)		
-												 res.render('index_admin', {title: 'Masjid Muslim-Halaman Admin'})
+												 res.redirect('/login1_/login')
 										      }
 										    }
 									   
@@ -659,7 +669,7 @@ app.post('/add', function(req, res, next){
 											pass_guest: rows[0].pass_guest,
 											email_guest: rows[0].email_guest,
 											no_hp_guest: rows[0].no_hp_guest					
-										})
+									})
 						      }
 						      else{
 						        

@@ -1,6 +1,10 @@
 var express = require('express')
 var app = express()
 
+
+app.get('/logout', function(req, res, next) {
+		res.render('index', {title: 'Masjid Muslim'})
+})
 // SHOW LIST OF admin
 app.get('/', function(req, res, next) {
 	req.getConnection(function(error, conn) {
