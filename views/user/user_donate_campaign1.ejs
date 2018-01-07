@@ -93,68 +93,55 @@ $(document).ready(function(){
         </nav>
   </head>
 
+  <body >
+    <div class="container">
 
-  <body>   
-  <div class="container">
-
-  <!--
-    Using FOREACH LOOP for the users array
-    
-    myArray.forEach(function(el, index) {
-      // el - current element, i - index
-    });
-  -->
-   <div class="row">
-    <div class="row" style="margin-bottom : 50px;">
-        <div class="col-md-12 ">
-    <% if (data) { %>
-    <% data.forEach(function(cpg){ %>
-      
-      
-          <div class="col-md-4 col-xs-4" style="height: 400px">
-              <a href='/login1_/detail/<%= cpg.id_cpg %>/<%= id_guest %>'>
-              <img src="/../images/<%= cpg.foto_cpg %>" class="image-responsive" style="width: 100%;max-height: 250px">
-              <strong>
-              <h3 style="text-align:justify; color: black;">
-                <%= cpg.judul_cpg %>
-              </h3>
-              </strong>
-              <p style="text-align:justify;color: black;">
-                <%= cpg.desc_cpg %>
-              </p>
-            </a>
-          </div>
-    
-    <% }) %>
-  <% } %>      
-        </div>
+  <div class="jumbotron">
+      <div style="text-align: center;">
+          <h2>Terima Kasih telah berpartisipasi dalam pembanguan Masjid
+              Silahkan Lakukan Transaksi Pembayaran Donasi </h2>
       </div>
-    </div>
-
-   
-  
-
-
-   
+      <p></p>
+      <div class="table-responsive" style="padding-top: 50px">
+      <table class="table"> 
+        <tr>
+          <td><p> ID Donasi : </p></td>
+          <td><p id="id_donasi"> <%= id_donasi %></p></td>
+        </tr>
+        <tr>
+          <td><p> Nama Bank : </p></td>
+          <td><p id="nama_bank"><%= nama_bank %></p></td>
+        </tr>
+        <tr>
+          <td><p> No Rekening Tujuan : </p></td>
+          <td><p id="no_rek"></p> <%= no_rek %></td>
+        </tr>
+        <tr>
+          <td><p> Jumlah Donasi : </p></td>
+          <td><p id="jum_donasi"> <%= jum_donasi %></p></td>
+        </tr>      
+      </table>
+      </div>
+      <p>CATATAN : Mohon di ingat kode ID Donasi untuk melakukan Konfirmasi Pembayaran</p>
   </div>
-
-
-
-
-  <!-- footer -->
-  <section id="credits" class="text-center">
-  <span class="social wow zoomIn">
-  <a href="#"><img src="image/f.png"></a>
-  <a href="#"><img src="image/t.png"></a>
-  <a href="#"><img src="image/ig.png"></a>
-  <a href="#"><img src="image/inn.png"></a>
-  </span><br/>Copyright &copy; WEBDONASI</a> 
-  <br/>
-</section>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
+
+
+
+
+  <!-- footer -->
+    <section id="footer" class="text-center">
+  <span class="social wow zoomIn">
+  <a href="#"><img src="image/f.png"></a>
+  <a href="#"><img src="image/t.png"></a>
+  <a href="#"><img src="image/ig.png"></a>
+  <a href="#"><img src="image/inn.png"></a>
+  </span><br/>Copyright &copy; Masjid Muslim</a> 
+  <br/>
+</section>
 </html>

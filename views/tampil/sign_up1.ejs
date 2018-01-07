@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%= title %></title>
   <title>Masjid Muslim</title>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
@@ -18,7 +19,7 @@
     <!-- Bootstrap -->
  
    <style type="text/css">
-      #nav li.active a {
+   #nav li.active a {
       background-color: #4169E1   ;
     }
       .bor {
@@ -26,7 +27,7 @@
         height: 500px;
       }
     .navbar-inverse {
-      background-color:  #87CEEB   ;
+      background-color:  #87CEEB  ;
 
       font-size:18px;
 
@@ -63,9 +64,59 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
-              
+             
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
           </header>
         </nav>
   </head>
+
+
+  <body>
+    <div class="container">
+
+
+    <div class="jumbotron">
+    <div style="text-align: center;">
+          <h2>Sign Up</h2>
+    </div>
+            <form action="/login1_/sign_up" method="post" name="form1">
+                      <div class="form-group">
+                        <label for="name_guest" class="control-label">Nama :</label>
+                        <input type="text" class="form-control" name="name_guest" id="name_guest" placeholder="Nama" required /></
+                      </div>
+                      <div class="form-group">
+                        <label for="pass_guest" class="control-label">Password:</label>
+                         <input type="password" class="form-control" id="pass_guest" placeholder="Password" name="pass_guest" required></
+                      </div>
+                      <div class="form-group">
+                        <label for="email_guest" class="control-label">Email :</label>
+                        <input type="text" class="form-control" id="email_guest" name="email_guest" placeholder="Email"  required /></
+                      </div>
+                      <div class="form-group">
+                        <label for="no_hp_guest" class="control-label">No HP :</label>
+                        <input type="text" class="form-control" name="no_hp_guest" id="no_hp_guest" placeholder="No HP"  required /></
+                      </div>                
+                  <input type="submit" name="Submit" value="Save Change" class="btn btn-primary" style="padding-top: 20px" />    
+           </form>
+        </div>
+    </div>
+      
+    <section id="credits" class="text-center">
+  <span class="social">
+  <a href="#"><img src="image/f.png"></a>
+  <a href="#"><img src="image/t.png"></a>
+  <a href="#"><img src="image/ig.png"></a>
+  <a href="#"><img src="image/inn.png"></a>
+  </span><br/>Copyright &copy; Masjid Muslim</a> 
+  <br/>
+</section>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

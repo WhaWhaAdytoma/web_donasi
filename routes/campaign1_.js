@@ -44,7 +44,7 @@ app.get('/detail/(:id)', function(req, res, next){
 				res.render('tampil/detail_campaign1', {
 					title: ' Data Campaign ', 
 					data: rows
-					
+
 				})
 			}			
 		})
@@ -88,7 +88,7 @@ app.post('/add', function(req, res, next){
 					
 				
 				} else {				
-					req.flash('success', 'Data added successfully!')
+					
 					req.getConnection(function(error, conn) {
 							conn.query('SELECT m1.tanggal, m1.id_donasi, m2.nama_bank, m2.no_rek, m1.jum_donasi FROM transaksi m1 JOIN rekening m2 ON m1.id_rek_tujuan= m2.id_rek_tujuan order by id_donasi desc limit 1',function(err, rows, fields) {
 								//if(err) throw err
@@ -99,8 +99,9 @@ app.post('/add', function(req, res, next){
 								}
 								else { // if  found
 									// render to views/admin/edit.ejs template file
+									req.flash('success', 'Data update successfully!')
 									res.render('tampil/donate_campaign1', {
-										title: 'Donate', 
+										title: 'Data update successfully!', 
 										//data: rows[0],
 										tanggal: rows[0].tanggal,
 										id_donasi: rows[0].id_donasi,
