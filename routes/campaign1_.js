@@ -44,6 +44,7 @@ app.get('/detail/(:id)', function(req, res, next){
 				res.render('tampil/detail_campaign1', {
 					title: ' Data Campaign ', 
 					data: rows
+					
 				})
 			}			
 		})

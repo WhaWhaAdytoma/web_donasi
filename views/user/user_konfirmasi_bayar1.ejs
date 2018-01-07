@@ -1,0 +1,162 @@
+<!Doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <title>Masjid Muslim</title>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+  
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown-toggle").dropdown();
+});
+</script>
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+
+    <!-- Bootstrap -->
+ 
+   <style type="text/css">
+   #nav li.active a {
+      background-color: #4169E1   ;
+    }
+      .bor {
+        background-color: #228B22 ;
+        height: 500px;
+      }
+    .navbar-inverse {
+      background-color:  #87CEEB  ;
+
+      font-size:18px;
+
+    }
+    </style>
+    <nav class="navbar navbar-inverse">
+
+        <header id="header" class="navbar navbar-inverse navbar-fixed-top" role="banner">
+          <div class="container" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">Masjid Muslim</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav" ></ul>
+
+              <ul id="nav" class="nav navbar-nav navbar-right" style="color : white">
+                <li ><a href="/login1_/beranda/<%= id_guest %>">Beranda</a></li>
+                <li><a href="/login1_/program/<%= id_guest %>">Program</a></li>
+                <li><a href="/login1_/konfirmasi/<%= id_guest %>">Konfirmasi Donasi</a></li>    
+
+                <!-- dropdown user -->          
+                <li style="padding-top: 10px">
+                      <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><%= name_guest %>
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="width: 300px">
+                        <li role="presentation"> <a role="menuitem" tabindex="-1" href="#">
+                            <img src="/../images/userlogin.png"class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px"> 
+                            <%= name_guest %></a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/login1_/edit/<%= id_guest %>">
+                        <button type="button" class="btn btn-info" style="width: 100%">Edit Profil</button>
+                        </a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/login1_/logout">
+                          <button type="button" class="btn btn-danger" style="width: 100%">Log Out</button>
+                        </a></li>    
+                    </ul>
+                     
+                </li>          
+              </ul>
+              <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+          </header>
+        </nav>
+  </head>
+
+
+
+  <body>
+    <div class="container">
+    <div class="jumbotron">
+    <div style="text-align: center;">
+          <h2>Konfirmasi Donasi</h2>
+    </div>
+      <form action="/login1_/addKonfirmasi/<%= id_guest %>" method="post" name="form1">
+            <div class="form-group">
+              <label for="id_donasi" class="control-label">ID Donasi :</label>
+              <input type="text" class="form-control" name="id_donasi" id="id_donasi" placeholder="ID Donasi"  required autofocus/></
+            </div>
+            <div class="form-group">
+              <label for="nama_donatur" class="control-label">Nama Donatur:</label>
+               <input type="text" class="form-control" id="nama_donatur" placeholder="Nama Donatur" name="nama_donatur" value="<%= name_guest %>" required ></
+            </div>
+            <div class="form-group">
+              <label for="email_donatur" class="control-label">Email Donatur :</label>
+              <input type="text" class="form-control" name="email_donatur" id="email_donatur" placeholder="Email Donatur" value="<%= email_guest %>" required /></
+            </div>
+             <div class="form-group">
+              <label for="no_hp_donatur" class="control-label">No Hp Donatur:</label>
+               <input type="text" class="form-control" id="no_hp_donatur" placeholder="No Hp" name="no_hp_donatur" value="<%= no_hp_guest %>" required ></
+            </div>
+            <div class="form-group">
+              <label for="id_rek_tujuan" class="control-label">Id Rek Tujuan :</label>
+                <select name="id_rek_tujuan" id="id_rek_tujuan" class="vfb-select  vfb-medium  required ">
+            <option value="1">BRI Syariah 105 79 35 628</option>
+            <option value="2">Mandiri Syariah 706 6116 561</option>
+           </select></
+            </div>
+            <div class="form-group">
+              <label for="rek_donatur" class="control-label">No Rekening Donatur :</label>
+              <input type="text" class="form-control" name="rek_donatur" id="rek_donatur" placeholder="No Rekening Donatur" required /></
+            </div>
+             <div class="form-group">
+              <label for="jum_donasi" class="control-label">Jumlah Donasi:</label>
+               <input type="text" class="form-control" id="jum_donasi" placeholder="nominal donasi" name="jum_donasi" required></
+            </div>
+            <div class="form-group">
+              <label for="tanggal" class="control-label">Tanggal :</label>
+              <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal" required /></
+            </div><p></p>
+            <input type="submit" name="Submit" value="Konfirmasi" class="btn btn-primary" required />
+        </form>
+        </div>
+    </div>
+      
+    <section id="credits" class="text-center">
+  <span class="social">
+  <a href="#"><img src="image/f.png"></a>
+  <a href="#"><img src="image/t.png"></a>
+  <a href="#"><img src="image/ig.png"></a>
+  <a href="#"><img src="image/inn.png"></a>
+  </span><br/>Copyright &copy; Masjid Muslim</a> 
+  <br/>
+</section>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

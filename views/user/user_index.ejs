@@ -12,7 +12,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script>
+$(document).ready(function(){
+    $(".dropdown-toggle").dropdown();
+});
+</script>
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 
@@ -51,11 +55,31 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav" ></ul>
+
               <ul id="nav" class="nav navbar-nav navbar-right" style="color : white">
-                <li ><a href="/">Beranda</a></li>
-                <li><a href="/campaign1_">Program</a></li>
-                <li><a href="/konfirmasi_bayar1_">Konfirmasi Donasi</a></li>
-                <li><a href="/login1_/login">Login</a></li>               
+                <li ><a href="/login1_/beranda/<%= id_guest %>">Beranda</a></li>
+                <li><a href="/login1_/program/<%= id_guest %>">Program</a></li>
+                <li><a href="/login1_/konfirmasi/<%= id_guest %>">Konfirmasi Donasi</a></li>    
+
+                <!-- dropdown user -->          
+                <li style="padding-top: 10px">
+                      <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><%= name_guest %>
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="width: 300px">
+                        <li role="presentation"> <a role="menuitem" tabindex="-1" href="#">
+                            <img src="/../images/userlogin.png"class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px"> 
+                            <%= name_guest %></a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/login1_/edit/<%= id_guest %>">
+                        <button type="button" class="btn btn-info" style="width: 100%">Edit Profil</button>
+                        </a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/login1_/logout">
+                          <button type="button" class="btn btn-danger" style="width: 100%">Log Out</button>
+                        </a></li>    
+                    </ul>
+                     
+                </li>          
               </ul>
               <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -63,7 +87,6 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
-             
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
           </header>
@@ -73,7 +96,8 @@
 
   <body>
     <div class="container">
-
+  
+  
       <div class="row">
         <div class="col-md-12 col-xs-12">
             <div class="col-md-12" style="height:400px; margin-bottom : 40px;">
@@ -160,12 +184,12 @@
           </div>
         </div>
         </div>
-      </div>
+      </div>     
+
+</div>
 
 
-      
 
-    </div>
 
 
     <section id="credits" class="text-center">

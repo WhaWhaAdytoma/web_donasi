@@ -32,9 +32,15 @@ including header content which is common for all pages
           <div class="col-md-4 col-xs-4" style="height: 400px">
               <a href='/campaign1_/detail/<%= cpg.id_cpg %>'>
               <img src="/../images/<%= cpg.foto_cpg %>" class="image-responsive" style="width: 100%;">
-              <p style="text-align:justify">
+             <strong>
+              <h3 style="text-align:justify; color: black;">
+                <%= cpg.judul_cpg %>
+              </h3>
+              </strong>
+              <p style="text-align:justify;color: black;">
                 <%= cpg.desc_cpg %>
-              </p></a>
+              </p>
+            </a>
           </div>
     
     <% }) %>
