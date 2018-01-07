@@ -1,0 +1,44 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../user/header.ejs %>
+
+<% if (messages.error) { %>
+  <p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+  <p style="color:green"><%- messages.success %></p>
+<% } %> 
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" id="login" method="POST" action="act.php">
+        <input type="hidden" name="act" value="login">
+        <h2 class="form-signin-heading" text-align="center">Please sign in</h2>
+        <div style="display: none" id="error" class="alert alert-danger">
+           Maaf Login gagal
+        </div>
+        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+        <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+        <button style="margin-top : 10px;" type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        <p style="text-align:right; margin-top : 10px;">Not a member? <a href="#" >Sign Up</a></p>
+          <p style="text-align:right; margin-top : 5px;">Forgot <a href="#">Password?</a></p>
+      </form>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+</html>

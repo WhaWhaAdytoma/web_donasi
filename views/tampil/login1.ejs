@@ -1,0 +1,46 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../user/header.ejs %>
+
+<% if (messages.error) { %>
+  <p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+  <p style="color:green"><%- messages.success %></p>
+<% } %> 
+
+  <body>
+
+    <div class="container">
+        <div style="max-width: 350px; margin-left: 400px;">
+            <form class="form-signin" id="login" method="POST" action="/login1_/add">
+              <input type="hidden" name="act" value="login">
+              <h2 class="form-signin-heading" style="text-align : center ">Please sign in</h2>
+              <div style="display: none" id="error" class="alert alert-danger">
+                 Maaf Login gagal
+              </div>
+              <label for="name_guest"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="email" id="email_guest" name="email_guest" class="form-control" placeholder="Email" required autofocus>
+
+              <label for="pass_guest"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="password" id="pass_guest" name="pass_guest" class="form-control" placeholder="Password" required>
+
+             <!--  <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+              </div> -->
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              <button style="margin-top : 10px;" type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+              <p style="text-align:right; margin-top : 10px;">Not a member? <a href="#" >Sign Up</a></p>
+                <!-- <p style="text-align:right; margin-top : 5px;">Forgot <a href="#">Password?</a></p> -->
+            </form>
+        </div><!-- /max widht -->
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../user/header.ejs %>
+
+<% if (messages.error) { %>
+  <p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+  <p style="color:green"><%- messages.success %></p>
+<% } %> 
+
+
+
+  <body>
+    <div class="container">
+    <div class="jumbotron">
+    <div style="text-align: center;">
+          <h2>Konfirmasi Donasi</h2>
+    </div>
+      <form action="/konfirmasi_bayar1_/add" method="post" name="form1">
+            <div class="form-group">
+              <label for="id_donasi" class="control-label">ID Donasi :</label>
+              <input type="text" class="form-control" name="id_donasi" id="id_donasi" placeholder="ID Donasi"  /></
+            </div>
+            <div class="form-group">
+              <label for="nama_donatur" class="control-label">Nama Donatur:</label>
+               <input type="text" class="form-control" id="nama_donatur" placeholder="Nama Donatur" name="nama_donatur" ></
+            </div>
+            <div class="form-group">
+              <label for="email_donatur" class="control-label">Email Donatur :</label>
+              <input type="text" class="form-control" name="email_donatur" id="email_donatur" placeholder="Email Donatur"/></
+            </div>
+             <div class="form-group">
+              <label for="no_hp_donatur" class="control-label">No Hp Donatur:</label>
+               <input type="text" class="form-control" id="no_hp_donatur" placeholder="No Hp" name="no_hp_donatur" ></
+            </div>
+            <div class="form-group">
+              <label for="id_rek_tujuan" class="control-label">Id Rek Tujuan :</label>
+                <select name="id_rek_tujuan" id="id_rek_tujuan" class="vfb-select  vfb-medium  required ">
+            <option value="1">BRI Syariah 105 79 35 628</option>
+            <option value="2">Mandiri Syariah 706 6116 561</option>
+           </select></
+            </div>
+            <div class="form-group">
+              <label for="rek_donatur" class="control-label">No Rekening Donatur :</label>
+              <input type="text" class="form-control" name="rek_donatur" id="rek_donatur" placeholder="No Rekening Donatur"/></
+            </div>
+             <div class="form-group">
+              <label for="jum_donasi" class="control-label">Jumlah Donasi:</label>
+               <input type="text" class="form-control" id="jum_donasi" placeholder="nominal donasi" name="jum_donasi" ></
+            </div>
+            <div class="form-group">
+              <label for="tanggal" class="control-label">Tanggal :</label>
+              <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"/></
+            </div><p></p>
+            <input type="submit" name="Submit" value="Konfirmasi" class="btn btn-primary" />
+        </form>
+        </div>
+    </div>
+      
+    <section id="credits" class="text-center">
+  <span class="social">
+  <a href="#"><img src="image/f.png"></a>
+  <a href="#"><img src="image/t.png"></a>
+  <a href="#"><img src="image/ig.png"></a>
+  <a href="#"><img src="image/inn.png"></a>
+  </span><br/>Copyright &copy; Masjid Muslim</a> 
+  <br/>
+</section>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
