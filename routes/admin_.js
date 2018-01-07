@@ -5,6 +5,52 @@ var app = express()
 app.get('/logout', function(req, res, next) {
 		res.render('index', {title: 'Masjid Muslim'})
 })
+
+//report
+app.get('/report/(:id)', function(req, res, next) {
+	req.getConnection(function(error, conn) {
+		conn.query('SELECT * FROM `view_laporan1` ORDER BY id_bayar ASC',function(err, rows, fields) {
+			//if(err) throw err
+			if (err) {
+				req.flash('error', err)
+				res.render('tampil/admin', {
+					title: ' Data Admin ', 
+					data: ''
+				})
+			} else {
+				// render to views/admin.ejs template file
+				/*res.render('tampil/admin', {
+					title: ' Data Admin ', 
+					data: rows
+				})*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id)
+								res.render('tampil/admin', {title: 'Masjid Muslim'})
+							}
+							else { // if admin found
+								// render to views/admin/edit.ejs template file
+								res.render('tampil/report', {
+									title: 'Masjid Muslim', 
+										data: rows,
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
+				})
+			}
+		})
+	})
+})
+//
 // SHOW LIST OF admin
 app.get('/(:id)', function(req, res, next) {
 	req.getConnection(function(error, conn) {

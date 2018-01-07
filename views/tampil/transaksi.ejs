@@ -18,9 +18,9 @@ including header content which is common for all pages
 	<h1>List Donatur </h1>
 </div>
 <div><h3>
-		    <a href="/rekening_"> Rekening</a> | 
-		    <a href="/pre_transaksi_">List Donatur [Pre Donate]</a> | 
-			<a href="/konfirmasi_bayar_">Konfirmasi Bayar</a> | 
+		    <a href="/rekening_/<%= id_admin1 %>"> Rekening</a> | 
+		    <a href="/pre_transaksi_/<%= id_admin1 %>">List Donatur [Pre Donate]</a> | 
+			<a href="/konfirmasi_bayar_/<%= id_admin1 %>">Konfirmasi Bayar</a> | 
 	</h>
 </div>
 
@@ -59,8 +59,8 @@ including header content which is common for all pages
 			<td><%= a.tanggal %></td>
 			<td>
 				<div style="float:left">
-					<a class="btn btn-warning" href='/rek_/edit/<%= rek.id_donasi %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
-					<form method="post" action="/rek_/delete/<%= rek.id_donasi %>"   style="float:right">	
+					<a class="btn btn-warning" href='/rek_/edit/<%= rek.id_donasi %>/<%= id_admin1 %>'><i class="glyphicon glyphicon-edit"></i> Edit</a>	
+					<form method="post" action="/rek_/delete/<%= rek.id_donasi %>/<%= id_admin1 %>"   style="float:right">	
 						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
 						<input type="hidden" name="_method" value="DELETE" />					
 					</form>
@@ -85,7 +85,7 @@ including header content which is common for all pages
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-         <form action="/pre_transaksi_/add" method="post" name="form1">
+         <form action="/pre_transaksi_/add/<%= id_admin1 %>" method="post" name="form1">
          	 <div class="form-group">
 	            <label for="id_cpg" class="control-label">ID campaignn:</label>
 	             <input type="text" class="form-control" id="id_cpg" placeholder="ID campaign" name="id_cpg" ></

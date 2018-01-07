@@ -1,0 +1,69 @@
+<!--
+including header content which is common for all pages
+-->
+<%- include ../layouts/header.ejs %>
+
+<% if (messages.error) { %>
+	<p style="color:red"><%- messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+	<p style="color:green"><%- messages.success %></p>
+<% } %>	
+
+<div style="text-align: center;">
+	<h1> Laporan Pembayaran Transaksi Donasi </h1>
+</div>
+
+
+
+
+<div class="table-responsive">
+<table class="table">          
+	<tr style='text-align:left; background-color:#CCC'>
+		<th>ID Pembayaran </th>
+		<th>ID Campaign </th>
+		<th>Nama Donatur</th>
+		<th>Jumlah Donasi</th>
+		<th>Nama Bank Tujuan</th>
+		<th>Tanggal</th>
+		
+	</tr>
+
+
+
+
+	<!--
+		Using FOREACH LOOP for the users array
+		
+		myArray.forEach(function(el, index) {
+			// el - current element, i - index
+		});
+	-->
+
+	<% if (data) { %>
+	<% data.forEach(function(a){ %>
+		<tr>
+			<td><%= a.id_bayar %></td>
+			<td><%= a.id_cpg %></td>
+			<td><%= a.nama_donatur %></td>
+			<td><%= a.jum_donasi %></td>
+			<td><%= a.nama_bank_tujuan %></td>
+			<td><%= a.tanggal %></td>
+			
+		</tr>
+	<% }) %>
+	<% } %>
+
+</table>
+</div>
+
+
+
+
+
+
+<!--
+including footer content which is common for all pages
+-->
+<%- include ../layouts/footer.ejs %>

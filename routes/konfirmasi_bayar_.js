@@ -25,7 +25,7 @@ app.get('/(:id)', function(req, res, next) {
 							// if admin not found
 							if (rows.length <= 0) {
 								req.flash('error', 'User not found with id = ' + req.params.id)
-								res.render('tampil/campaign', {title: 'Masjid Muslim'})
+								res.render('tampil/konfirmasi_bayar', {title: 'Masjid Muslim'})
 							}
 							else { // if admin found
 								// render to views/admin/edit.ejs template file
@@ -90,7 +90,7 @@ app.post('/add/(:id)', function(req, res, next){
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
-					res.render('tampil/campaign', {title: 'Masjid Muslim'})
+					res.render('tampil/konfirmasi_bayar', {title: 'Masjid Muslim'})
 					
 				
 				} else {				
@@ -138,7 +138,7 @@ app.post('/add/(:id)', function(req, res, next){
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */ 
-        res.render('tampil/campaign', {title: 'Masjid Muslim'})
+        res.render('tampil/konfirmasi_bayar', {title: 'Masjid Muslim'})
     }
 })
 
@@ -152,7 +152,7 @@ app.get('/edit/(:id1)/(:id2)', function(req, res, next){
 			// if   not found
 			if (rows.length <= 0) {
 				req.flash('error', '  not found with id = ' + req.params.id1)
-				res.render('tampil/campaign', {title: 'Masjid Muslim'})
+				res.render('tampil/konfirmasi_bayar', {title: 'Masjid Muslim'})
 			}
 			else { // if   found
 				// render to views/ /edit.ejs template file
@@ -319,15 +319,15 @@ app.put('/edit/(:id1)/(:id2)', function(req, res, next) {
 
 // DELETE  
 app.delete('/delete/(:id1)/(:id2)', function(req, res, next) {
-	var konfirmasi_bayar = { id: req.params.id }
+	var konfirmasi_bayar = { id: req.params.id1 }
 	
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM konfirmasi_bayar WHERE id_bayar = ' + req.params.id, konfirmasi_bayar, function(err, result) {
+		conn.query('DELETE FROM konfirmasi_bayar WHERE id_bayar = ' + req.params.id1, konfirmasi_bayar, function(err, result) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
 				// redirect to  s list page
-				res.render('tampil/campaign', {title: 'Masjid Muslim'})
+				res.render('tampil/konfirmasi_bayar', {title: 'Masjid Muslim'})
 			} else {
 				/*req.flash('success', '  deleted successfully! id = ' + req.params.id)
 				// redirect to  s list page

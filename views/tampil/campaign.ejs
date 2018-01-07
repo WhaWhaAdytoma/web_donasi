@@ -60,8 +60,8 @@ including header content which is common for all pages
 			<td><%= cpg.kontak_dkm %></td>
 			<td>
 				<div style="float:left">
-					<a class="btn btn-warning" href='/campaign_/edit/<%= cpg.id_cpg %>'> <i class="glyphicon glyphicon-edit"></i> Edit</a>	
-					<form method="post" action="/campaign_/delete/<%= cpg.id_cpg %>"   style="float:right">	
+					<a class="btn btn-warning" href='/campaign_/edit/<%= cpg.id_cpg %>/<%= id_admin1 %>'> <i class="glyphicon glyphicon-edit"></i> Edit</a>	
+					<form method="post" action="/campaign_/delete/<%= cpg.id_cpg %>/<%= id_admin1 %>"   style="float:right">	
 						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" class="btn btn-danger" />
 						<input type="hidden" name="_method" value="DELETE" />					
 					</form>
@@ -86,7 +86,7 @@ including header content which is common for all pages
         <h4 class="modal-title" id="myModalLabel">New Campaign</h4>
       </div>
       <div class="modal-body">
-         <form action="/campaign_/add" method="post" name="form1">
+         <form action="/campaign_/add/<%= id_admin1 %>" method="post" name="form1">
 	          <div class="form-group">
 	            <label for="judul" class="control-label">Judul Campaign :</label>
 	            <input type="text" class="form-control" name="judul_cpg" id="judul_cpg" placeholder="Judul Campaign"/> </

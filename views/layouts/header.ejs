@@ -50,14 +50,14 @@
                 
                 <!-- dropdown user -->          
                 <li style="padding-top: 10px">
-                      <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><%= name_admin %>
+                      <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><%= name_admin1 %>
                       <span class="caret"></span></button>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="width: 300px">
                         <li role="presentation"> <a role="menuitem" tabindex="-1" href="#">
                             <img src="/../images/userlogin.png"class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px"> 
-                            <%= name_admin %></a></li>
+                            <%= name_admin1 %></a></li>
                         <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin_/edit/<%= id_admin %>">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin_/edit/<%= id_admin1 %>/<%= id_admin1 %>">
                         <button type="button" class="btn btn-info" style="width: 100%">Edit Profil</button>
                         </a></li>
                         <li role="presentation" class="divider"></li>
@@ -79,30 +79,31 @@
 	  	<div class="jumbotron" style="padding-left: 50px">
 		   <div class="row">
 		    <div class="col-sm-2">
-		    	<a href="/admin_">
+		    	<a href="/admin_/<%= id_admin1 %>">
 		    	<img src="/../images/admin1.png" class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px">
 			    <p>ADMIN</p>
 			    </div>
 			    </a>
 		    <div class="col-sm-2" >
-		    	<a href="/guest_">
+		    	<a href="/guest_/<%= id_admin1 %>">
 		    	<img src="/../images/users1.png" class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px">
 		        <p>USERS</p>
 		        </a>
 		    </div>
 		    <div class="col-sm-2" >
-		    	<a href="/campaign_">
+		    	<a href="/campaign_/<%= id_admin1 %>">
 		    	<img src="/../images/mosque.png" class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px">
 		    <p>CAMPAIGN MOSQUE</p> </a>
 		    </div>
 		    <div class="col-sm-2" >
-		    	<a href="/rekening_">
+		    	<a href="/rekening_/<%= id_admin1 %>">
 		    	<img src="/../images/transaksi1.png" class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px">
 			    <p>TRUNSACTION</p></a>
 			    </div>
 		    <div class="col-sm-2" >
+		    	<a href="/admin_/report/<%= id_admin1 %>">
 		    	<img src="/../images/laporan.png" class="img-rounded" alt="Cinque Terre" style="width:50px; height:50px">
-		    <p>REPORT</p>
+		    <p>REPORT</p></a>
 		    </div>	    
 
 		  <!--   <div class="col-sm-2" >

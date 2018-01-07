@@ -635,11 +635,11 @@ app.post('/add', function(req, res, next){
 										      	   res.render('layouts/header', {
 															title: 'Masjid Muslim-Halaman Admin', 
 															//data: rows[0],
-															id_admin: rows[0].id_admin,
-															name_admin: rows[0].name_admin,
-															pass_admin: rows[0].pass_admin,
-															email_admin: rows[0].email_admin,
-															no_hp_admin: rows[0].no_hp_admin					
+															id_admin1: rows[0].id_admin,
+															name_admin1: rows[0].name_admin,
+															pass_admin1: rows[0].pass_admin,
+															email_admin1: rows[0].email_admin,
+															no_hp_admin1: rows[0].no_hp_admin					
 													})
 										            
 										      }
