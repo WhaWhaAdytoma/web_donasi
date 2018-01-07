@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 
 // SHOW LIST OF transaksi
-app.get('/', function(req, res, next) {
+app.get('/(:id)', function(req, res, next) {
 	req.getConnection(function(error, conn) {
 		conn.query('SELECT * FROM transaksi ORDER BY id_donasi ASC',function(err, rows, fields) {
 			//if(err) throw err
@@ -14,10 +14,37 @@ app.get('/', function(req, res, next) {
 				})
 			} else {
 				// render to views/transaksi.ejs template file
-				res.render('tampil/transaksi', {
+				/*res.render('tampil/transaksi', {
 					title: 'Transaksi ', 
 					data: rows
+				})*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id)
+								res.render('tampil/transaksi', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								// render to views/admin/edit.ejs template file
+								res.render('tampil/transaksi', {
+									title: 'Data Transaksi-Masjid Muslim', 
+										data: rows,
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
 				})
+
 			}
 		})
 	})
@@ -37,7 +64,7 @@ app.get('/add', function(req, res, next){
 })
 
 // ADD NEW Transaksi POST ACTION
-app.post('/add', function(req, res, next){	
+app.post('/add/(:id)', function(req, res, next){	
 	req.assert('id_cpg', 'id_cpg is required').notEmpty()           //Validate name
 	req.assert('id_rek_tujuan', 'Rek_tujuan is required').notEmpty()             //Validate age
     req.assert('jum_donasi', 'A jumlah donasi is required').notEmpty()  //Validate 
@@ -68,13 +95,40 @@ app.post('/add', function(req, res, next){
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
-					res.redirect('/pre_transaksi_')
-					
+					res.render('tampil/transaksi', {
+									title: 'Masjid Muslim'
+												
+								})
 				
 				} else {				
-					req.flash('success', 'Data added successfully!')
-					res.redirect('/pre_transaksi_')
-				
+					/*req.flash('success', 'Data added successfully!')
+					res.redirect('/pre_transaksi_')*/
+					req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id)
+								res.render('tampil/transaksi', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								req.flash('success', 'Data added successfully!')
+								res.render('tampil/transaksi', {
+									title: 'Data Transaksi-Masjid Muslim', 
+										
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
+				})
 
 					
 				}
@@ -93,25 +147,28 @@ app.post('/add', function(req, res, next){
 		 * because req.param('name') is deprecated
 		 */ 
 
-        res.redirect('/pre_transaksi_')
+       res.render('tampil/transaksi', {
+									title: 'Masjid Muslim'
+												
+								})
     }
 })
 
 
 // SHOW EDIT Transaksi FORM
-app.get('/edit/(:id)', function(req, res, next){
+app.get('/edit/(:id1)/(:id2)', function(req, res, next){
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM transaksi WHERE id_donasi = ' + req.params.id, function(err, rows, fields) {
+		conn.query('SELECT * FROM transaksi WHERE id_donasi = ' + req.params.id1, function(err, rows, fields) {
 			if(err) throw err
 			
 			// if Transaksi not found
 			if (rows.length <= 0) {
-				req.flash('error', 'Transaksi not found with id = ' + req.params.id)
-				res.redirect('/pre_transaksi_')
+				req.flash('error', 'Transaksi not found with id = ' + req.params.id1)
+				res.render('tampil/transaksi', {title: 'Masjid Muslim'})
 			}
 			else { // if Transaksi found
 				// render to views/Transaksi/edit.ejs template file
-				res.render('tampil/edit_transaksi', {
+				/*res.render('tampil/edit_transaksi', {
 					title: 'Edit Transaksi', 
 					//data: rows[0],
 					id_donasi: rows[0].id_donasi,
@@ -119,6 +176,37 @@ app.get('/edit/(:id)', function(req, res, next){
 					id_rek_tujuan: rows[0].id_rek_tujuan,
 					jum_donasi: rows[0].jum_donasi,
 					tanggal: rows[0].tanggal					
+				})*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id2)
+								res.render('tampil/transaksi', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								
+								res.render('tampil/edit_transaksi', {
+									title: 'Edit Transaksi', 	
+										id_donasi: rows[0].id_donasi,
+										id_cpg: rows[0].id_cpg,
+										id_rek_tujuan: rows[0].id_rek_tujuan,
+										jum_donasi: rows[0].jum_donasi,
+										tanggal: rows[0].tanggal,
+
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
 				})
 			}			
 		})
@@ -127,7 +215,7 @@ app.get('/edit/(:id)', function(req, res, next){
 	
 
 // EDIT Transaksi POST ACTION
-app.put('/edit/(:id)', function(req, res, next) {
+app.put('/edit/(:id1)/(:id2)', function(req, res, next) {
 	req.assert('id_cpg', 'id_cpg is required').notEmpty()           //Validate name
 	req.assert('id_rek_tujuan', 'Rek_tujuan is required').notEmpty()             //Validate age
     req.assert('jum_donasi', 'A jumlah donasi email is required').notEmpty()  //Validate 
@@ -154,7 +242,7 @@ app.put('/edit/(:id)', function(req, res, next) {
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('UPDATE transaksi SET ? WHERE id_donasi = ' + req.params.id, transaksi, function(err, result) {
+			conn.query('UPDATE transaksi SET ? WHERE id_donasi = ' + req.params.id1, transaksi, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
@@ -169,10 +257,36 @@ app.put('/edit/(:id)', function(req, res, next) {
 						tanggal: req.body.tanggal
 					})
 				} else {
-					req.flash('success', 'Data updated successfully!')
+					/*req.flash('success', 'Data updated successfully!')
 					
 					// render to views/Transaksi/add.ejs
-					res.redirect('/pre_transaksi_')
+					res.redirect('/pre_transaksi_')*/
+						req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id2)
+								res.render('tampil/transaksi', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								req.flash('success', 'Data updated successfully!')
+								res.render('tampil/transaksi', {
+									title: 'Data Transaksi-Masjid Muslim', 
+										
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
+				})
 				}
 			})
 		})
@@ -200,20 +314,46 @@ app.put('/edit/(:id)', function(req, res, next) {
 })
 
 // DELETE Transaksi
-app.delete('/delete/(:id)', function(req, res, next) {
-	var transaksi = { id: req.params.id }
+app.delete('/delete/(:id1)/(:id2)', function(req, res, next) {
+	var transaksi = { id: req.params.id1 }
 	
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM transaksi WHERE id_donasi = ' + req.params.id, transaksi, function(err, result) {
+		conn.query('DELETE FROM transaksi WHERE id_donasi = ' + req.params.id1, transaksi, function(err, result) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
 				// redirect to Transaksis list page
-				res.redirect('/pre_transaksi_')
+				res.render('tampil/transaksi', {title: 'Masjid Muslim'})
 			} else {
-				req.flash('success', 'Transaksi deleted successfully! id = ' + req.params.id)
+				/*req.flash('success', 'Transaksi deleted successfully! id = ' + req.params.id1)
 				// redirect to Transaksis list page
-				res.redirect('/pre_transaksi_')
+				res.redirect('/pre_transaksi_')*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id2)
+								res.render('tampil/transaksi', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								req.flash('success', 'Transaksi deleted successfully! id = ' + req.params.id1)
+								res.render('tampil/transaksi', {
+									title: 'Data Transaksi-Masjid Muslim', 
+										
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
+				})
 			}
 		})
 	})

@@ -2,7 +2,7 @@ var express = require('express')
 var app = express()
 
 // SHOW LIST OF campaign
-app.get('/', function(req, res, next) {
+app.get('/(:id)', function(req, res, next) {
 	req.getConnection(function(error, conn) {
 		conn.query('SELECT * FROM campaign ORDER BY id_cpg ASC',function(err, rows, fields) {
 			//if(err) throw err
@@ -14,10 +14,34 @@ app.get('/', function(req, res, next) {
 				})
 			} else {
 				// render to views/campaign.ejs template file
-				res.render('tampil/campaign', {
+				/*res.render('tampil/campaign', {
 					title: ' Data campaign ', 
 					data: rows
+				})*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id)
+								res.render('tampil/campaign', {title: 'Masjid Muslim'})
+							}
+							else { // if admin found
+								// render to views/admin/edit.ejs template file
+								res.render('tampil/campaign', {
+									title: 'Data Campaign-Masjid Muslim', 
+										data: rows,
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
 				})
+
 			}
 		})
 	})
@@ -44,7 +68,7 @@ app.get('/add', function(req, res, next){
 })
 
 // ADD NEW campaign POST ACTION
-app.post('/add', function(req, res, next){	
+app.post('/add/(:id)', function(req, res, next){	
 	req.assert('judul_cpg', 'judul_cpg is required').notEmpty()           
 	req.assert('desc_cpg', 'desc_cpg is required').notEmpty()            
     req.assert('foto_cpg', 'foto_cpg is required').notEmpty()  
@@ -85,10 +109,36 @@ app.post('/add', function(req, res, next){
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
-					res.redirect('/campaign_')
+					res.render('tampil/campaign', {title: 'Masjid Muslim'})
 				} else {				
-					req.flash('success', 'Data added successfully!')				
-				    res.redirect('/campaign_')
+					/*req.flash('success', 'Data added successfully!')				
+				    res.redirect('/campaign_')*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id)
+								res.render('tampil/campaign', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								req.flash('success', 'Data added successfully!')
+								res.render('tampil/campaign', {
+									title: 'Data Campaign-Masjid Muslim', 
+										
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
+				})
 				}
 			})
 		})
@@ -99,26 +149,26 @@ app.post('/add', function(req, res, next){
 			error_msg += error.msg + '<br>'
 		})				
 		req.flash('error', error_msg)		
-		 res.redirect('/campaign_')
+		 res.render('tampil/campaign', {title: 'Masjid Muslim'})
 		
     }
 })
 
 
 // SHOW EDIT campaign FORM
-app.get('/edit/(:id)', function(req, res, next){
+app.get('/edit/(:id1)/(:/id2)', function(req, res, next){
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM campaign WHERE id_cpg = ' + req.params.id, function(err, rows, fields) {
+		conn.query('SELECT * FROM campaign WHERE id_cpg = ' + req.params.id1, function(err, rows, fields) {
 			if(err) throw err
 			
 			// if campaign not found
 			if (rows.length <= 0) {
-				req.flash('error', 'campaign not found with id = ' + req.params.id)
-				res.redirect('/campaign_')
+				req.flash('error', 'campaign not found with id = ' + req.params.id1)
+				res.render('tampil/campaign', {title: 'Masjid Muslim'})
 			}
 			else { // if campaign found
 				// render to views/campaign/edit.ejs template file
-				res.render('tampil/edit_campaign', {
+				/*res.render('tampil/edit_campaign', {
 					title: 'Edit campaign', 
 					//data: rows[0],
 					id: rows[0].id_cpg,
@@ -132,14 +182,52 @@ app.get('/edit/(:id)', function(req, res, next){
 					alamat: rows[0].alamat,
 					kontak_dkm: rows[0].kontak_dkm
 						
+				})*/
+					req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id2)
+								res.render('tampil/campaign', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								req.flash('success', 'Data added successfully!')
+								res.render('tampil/edit_campaign', {
+									title: 'Edit Campaign', 
+										
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin,
+
+										id: rows[0].id_cpg,
+										judul_cpg: rows[0].judul_cpg,
+										desc_cpg: rows[0].desc_cpg,
+										foto_cpg: rows[0].foto_cpg,	
+										start_cpg: rows[0].start_cpg,	
+										deadline_cpg: rows[0].deadline_cpg,
+										target_cpg: rows[0].target_cpg,	
+										income_cpg: rows[0].income_cpg,
+										alamat: rows[0].alamat,
+										kontak_dkm: rows[0].kontak_dkm					
+								})
+							}			
+						})
 				})
+
 			}			
 		})
 	})
 })
 
 // EDIT campaign POST ACTION
-app.put('/edit/(:id)', function(req, res, next) {
+app.put('/edit/(:id1)/(:id2)', function(req, res, next) {
 	req.assert('judul_cpg', 'judul_cpg is required').notEmpty()           
 	req.assert('desc_cpg', 'desc_cpg is required').notEmpty()            
     req.assert('foto_cpg', 'foto_cpg is required').notEmpty()  
@@ -176,7 +264,7 @@ app.put('/edit/(:id)', function(req, res, next) {
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('UPDATE campaign SET ? WHERE id_cpg = ' + req.params.id, campaign, function(err, result) {
+			conn.query('UPDATE campaign SET ? WHERE id_cpg = ' + req.params.id1, campaign, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
@@ -197,10 +285,37 @@ app.put('/edit/(:id)', function(req, res, next) {
 						
 					})
 				} else {
-					req.flash('success', 'Data updated successfully!')
+					/*req.flash('success', 'Data updated successfully!')
 					
 					// render to views/campaign/add.ejs
-					res.redirect('/campaign_')
+					res.redirect('/campaign_')*/
+					req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id2)
+								res.render('tampil/campaign', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								req.flash('success', 'Data updated successfully!')
+								res.render('tampil/campaign', {
+									title: 'Campaign Masjid Muslim', 
+										
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin
+				
+								})
+							}			
+						})
+					})
 				}
 			})
 		})
@@ -233,20 +348,47 @@ app.put('/edit/(:id)', function(req, res, next) {
 })
 
 // DELETE campaign
-app.delete('/delete/(:id)', function(req, res, next) {
-	var campaign = { id: req.params.id }
+app.delete('/delete/(:id1)', function(req, res, next) {
+	var campaign = { id: req.params.id1 }
 	
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM campaign WHERE id_cpg = ' + req.params.id, campaign, function(err, result) {
+		conn.query('DELETE FROM campaign WHERE id_cpg = ' + req.params.id1, campaign, function(err, result) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
 				// redirect to campaigns list page
-				res.redirect('/campaign_')
+				res.render('tampil/campaign', {title: 'Masjid Muslim'})
 			} else {
-				req.flash('success', 'campaign deleted successfully! id = ' + req.params.id)
+				/*req.flash('success', 'campaign deleted successfully! id = ' + req.params.id1)
 				// redirect to campaigns list page
-				res.redirect('/campaign_')
+				res.redirect('/campaign_')*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id2)
+								res.render('tampil/campaign', {
+									title: 'Masjid Muslim'
+												
+								})
+							}
+							else { // if admin found
+								req.flash('success', 'campaign deleted successfully! id = ' + req.params.id1)
+								res.render('tampil/campaign', {
+									title: 'Campaign Masjid Muslim', 
+										
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin
+				
+								})
+							}			
+						})
+					})
 			}
 		})
 	})

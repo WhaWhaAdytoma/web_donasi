@@ -6,7 +6,7 @@ app.get('/logout', function(req, res, next) {
 		res.render('index', {title: 'Masjid Muslim'})
 })
 // SHOW LIST OF admin
-app.get('/', function(req, res, next) {
+app.get('/(:id)', function(req, res, next) {
 	req.getConnection(function(error, conn) {
 		conn.query('SELECT * FROM admin ORDER BY id_admin ASC',function(err, rows, fields) {
 			//if(err) throw err
@@ -18,9 +18,32 @@ app.get('/', function(req, res, next) {
 				})
 			} else {
 				// render to views/admin.ejs template file
-				res.render('tampil/admin', {
+				/*res.render('tampil/admin', {
 					title: ' Data Admin ', 
 					data: rows
+				})*/
+				req.getConnection(function(error, conn) {
+						conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows2, fields) {
+							if(err) throw err
+							
+							// if admin not found
+							if (rows.length <= 0) {
+								req.flash('error', 'User not found with id = ' + req.params.id)
+								res.render('tampil/admin', {title: 'Masjid Muslim'})
+							}
+							else { // if admin found
+								// render to views/admin/edit.ejs template file
+								res.render('tampil/admin', {
+									title: 'Masjid Muslim', 
+										data: rows,
+										id_admin1: rows2[0].id_admin,
+										name_admin1: rows2[0].name_admin,
+										pass_admin1: rows2[0].pass_admin,
+										email_admin1: rows2[0].email_admin,
+										no_hp_admin1: rows2[0].no_hp_admin					
+								})
+							}			
+						})
 				})
 			}
 		})
@@ -40,7 +63,7 @@ app.get('/add', function(req, res, next){
 })
 
 // ADD NEW admin POST ACTION
-app.post('/add', function(req, res, next){	
+app.post('/add/(:id)', function(req, res, next){	
 	req.assert('name', 'Name is required').notEmpty()           //Validate name
 	req.assert('password', 'Password is required').notEmpty()             //Validate age
     req.assert('email', 'A valid email is required').isEmail()  //Validate email
@@ -71,10 +94,34 @@ app.post('/add', function(req, res, next){
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
-					res.redirect('/admin_')
+					res.render('tampil/admin', {title: 'Masjid Muslim'})
 				} else {				
-					req.flash('success', 'Data added successfully!')				
-				    res.redirect('/admin_')
+					/*req.flash('success', 'Data added successfully!')				
+				    res.render('tampil/admin', {title: 'Masjid Muslim'})*/
+					    req.getConnection(function(error, conn) {
+							conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows2, fields) {
+								if(err) throw err
+								
+								// if admin not found
+								if (rows.length <= 0) {
+									req.flash('error', 'User not found with id = ' + req.params.id)
+									res.render('tampil/admin', {title: 'Masjid Muslim'})
+								}
+								else { // 
+									// render to views/admin/edit.ejs template file
+									req.flash('success', 'Data added successfully!')
+									res.render('tampil/admin', {
+										title: 'Masjid Muslim', 
+											
+											id_admin1: rows2[0].id_admin,
+											name_admin1: rows2[0].name_admin,
+											pass_admin1: rows2[0].pass_admin,
+											email_admin1: rows2[0].email_admin,
+											no_hp_admin1: rows2[0].no_hp_admin					
+									})
+								}			
+							})
+					    })
 				}
 			})
 		})
@@ -102,19 +149,19 @@ app.post('/add', function(req, res, next){
 
 
 // SHOW EDIT admin FORM
-app.get('/edit/(:id)', function(req, res, next){
+app.get('/edit/(:id1)/(:id2)', function(req, res, next){
 	req.getConnection(function(error, conn) {
-		conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id, function(err, rows, fields) {
+		conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id1, function(err, rows, fields) {
 			if(err) throw err
 			
 			// if admin not found
 			if (rows.length <= 0) {
 				req.flash('error', 'admin not found with id = ' + req.params.id)
-				res.redirect('/admin_')
+				res.render('tampil/admin', {title: 'Masjid Muslim'})
 			}
 			else { // if admin found
 				// render to views/admin/edit.ejs template file
-				res.render('tampil/edit_admin', {
+				/*res.render('tampil/edit_admin', {
 					title: 'Edit admin', 
 					//data: rows[0],
 					id: rows[0].id_admin,
@@ -122,6 +169,36 @@ app.get('/edit/(:id)', function(req, res, next){
 					password: rows[0].pass_admin,
 					email: rows[0].email_admin,
 					no_hp: rows[0].no_hp_admin					
+				})*/
+				req.getConnection(function(error, conn) {
+							conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+								if(err) throw err
+								
+								// if admin not found
+								if (rows.length <= 0) {
+									req.flash('error', 'User not found with id = ' + req.params.id2)
+									res.render('tampil/admin', {title: 'Masjid Muslim'})
+								}
+								else { // 
+									// render to views/admin/edit.ejs template file
+							
+									res.render('tampil/edit_admin', {
+										title: 'Edit admin', 
+										//data: rows[0],
+										id: rows[0].id_admin,
+										name: rows[0].name_admin,
+										password: rows[0].pass_admin,
+										email: rows[0].email_admin,
+										no_hp: rows[0].no_hp_admin,	
+											
+											id_admin1: rows2[0].id_admin,
+											name_admin1: rows2[0].name_admin,
+											pass_admin1: rows2[0].pass_admin,
+											email_admin1: rows2[0].email_admin,
+											no_hp_admin1: rows2[0].no_hp_admin					
+									})
+								}			
+							})
 				})
 			}			
 		})
@@ -129,7 +206,7 @@ app.get('/edit/(:id)', function(req, res, next){
 })
 
 // EDIT admin POST ACTION
-app.put('/edit/(:id)', function(req, res, next) {
+app.put('/edit/(:id1)/(:id2)', function(req, res, next) {
 	req.assert('name', 'Name is required').notEmpty()           //Validate name
 	req.assert('password', 'Password is required').notEmpty()             //Validate age
     req.assert('email', 'A valid email is required').isEmail()
@@ -156,7 +233,7 @@ app.put('/edit/(:id)', function(req, res, next) {
 		}
 		
 		req.getConnection(function(error, conn) {
-			conn.query('UPDATE admin SET ? WHERE id_admin = ' + req.params.id, admin, function(err, result) {
+			conn.query('UPDATE admin SET ? WHERE id_admin = ' + req.params.id1, admin, function(err, result) {
 				//if(err) throw err
 				if (err) {
 					req.flash('error', err)
@@ -171,10 +248,37 @@ app.put('/edit/(:id)', function(req, res, next) {
 						no_hp: req.body.no_hp
 					})
 				} else {
-					req.flash('success', 'Data updated successfully!')
+					/*req.flash('success', 'Data updated successfully!')
 					
 					// render to views/admin/add.ejs
-					res.redirect('/admin_')
+					res.render('tampil/admin', {title: 'Masjid Muslim'})*/
+						req.getConnection(function(error, conn) {
+							conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+								if(err) throw err
+								
+								// if admin not found
+								if (rows.length <= 0) {
+									req.flash('error', 'User not found with id = ' + req.params.id2)
+									res.render('tampil/admin', {
+										title: 'Admin', 
+									})
+								}
+								else { // 
+									// render to views/admin/edit.ejs template file
+									req.flash('success', 'Data updated successfully!')
+									res.render('tampil/admin', {
+										title: 'Admin', 
+										
+											
+											id_admin1: rows2[0].id_admin,
+											name_admin1: rows2[0].name_admin,
+											pass_admin1: rows2[0].pass_admin,
+											email_admin1: rows2[0].email_admin,
+											no_hp_admin1: rows2[0].no_hp_admin					
+									})
+								}			
+							})
+				})
 				}
 			})
 		})
@@ -202,20 +306,45 @@ app.put('/edit/(:id)', function(req, res, next) {
 })
 
 // DELETE admin
-app.delete('/delete/(:id)', function(req, res, next) {
-	var admin = { id: req.params.id }
+app.delete('/delete/(:id1)/(:id2)', function(req, res, next) {
+	var admin = { id: req.params.id1 }
 	
 	req.getConnection(function(error, conn) {
-		conn.query('DELETE FROM admin WHERE id_admin = ' + req.params.id, admin, function(err, result) {
+		conn.query('DELETE FROM admin WHERE id_admin = ' + req.params.id1, admin, function(err, result) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
 				// redirect to admins list page
-				res.redirect('/admin_')
+				res.render('tampil/admin', {title: 'Masjid Muslim'})
 			} else {
-				req.flash('success', 'admin deleted successfully! id = ' + req.params.id)
+				/*req.flash('success', 'admin deleted successfully! id = ' + req.params.id1)
 				// redirect to admins list page
-				res.redirect('/admin_')
+				res.render('tampil/admin', {title: 'Masjid Muslim'})*/
+				req.getConnection(function(error, conn) {
+							conn.query('SELECT * FROM admin WHERE id_admin = ' + req.params.id2, function(err, rows2, fields) {
+								if(err) throw err
+								
+								// if admin not found
+								if (rows.length <= 0) {
+									req.flash('error', 'User not found with id = ' + req.params.id2)
+									res.render('tampil/admin', {
+										title: 'Admin', 
+									})
+								}
+								else { // 
+									// render to views/admin/edit.ejs template file
+									req.flash('success', 'admin deleted successfully! id = ' + req.params.id1)
+									res.render('tampil/admin', {
+										title: 'Masjid Muslim', 																					
+											id_admin1: rows2[0].id_admin,
+											name_admin1: rows2[0].name_admin,
+											pass_admin1: rows2[0].pass_admin,
+											email_admin1: rows2[0].email_admin,
+											no_hp_admin1: rows2[0].no_hp_admin					
+									})
+								}			
+							})
+				})
 			}
 		})
 	})
