@@ -341,7 +341,8 @@ app.post('/addKonfirmasi/(:id)', function(req, res, next){
 			jum_donasi: req.sanitize('jum_donasi').escape().trim(),
 			tanggal: req.sanitize('tanggal').escape().trim()
 		}
-		var id_donasi = req.sanitize('id_donasi').escape().trim()
+		var id_donasi = req.body.id_donasi; 
+
 		req.getConnection(function(error, conn) {
 			conn.query('INSERT INTO konfirmasi_bayar SET ?', konfirmasi_bayar, function(err, result) {
 				//if(err) throw err
@@ -351,34 +352,82 @@ app.post('/addKonfirmasi/(:id)', function(req, res, next){
 					
 				
 				} else {				
-					req.flash('success', 'Data added successfully!')
-					
-					req.getConnection(function(error, conn) {
-						conn.query('SELECT * FROM guest WHERE id_guest = ' + req.params.id, function(err, rows2, fields) {
-							if(err) throw err
+						req.getConnection(function(error, conn) {
+							conn.query('SELECT * FROM transaksi WHERE id_donasi = ?',[id_donasi], function(err, rows, fields) {
+								//if(err) throw err
+								if (err) {
+									req.flash('error', err)
+									res.render('user/konfirmasi_bayar1', {
+										title: '  konfirmasi_bayar ', 
+										data: ''
+									})
+								} else {
+												
+										//UPDATE `campaign` SET `income_cpg` = '70000' WHERE `campaign`.`id_cpg` = 5;
+										//conn.query('UPDATE admin SET ? WHERE id_admin = ' + req.params.id1, admin, function(err, result) {
+										//'UPDATE `campaign` SET `income_cpg` = ?',[jum],' WHERE `id_cpg` = ?',[id_cpg],
+										var id_cpg = rows[0].id_cpg;
+										req.getConnection(function(error, conn) {
+											conn.query('SELECT sum(jum_donasi) AS jumlah FROM `view_laporan1` WHERE id_cpg = ?',[id_cpg], function(err, rows, fields) {
+												//if(err) throw err
+												if (err) {
+													req.flash('error', err)
+													res.render('user/konfirmasi_bayar1', {
+														title: '  konfirmasi_bayar ', 
+														data: ''
+													})
+												} else {
+																
+														var jum = rows[0].jumlah;
+														req.getConnection(function(error, conn) {
+															conn.query('UPDATE campaign SET income_cpg = ? WHERE id_cpg = ?',[jum,id_cpg], function(err, rows, fields) {
+																//if(err) throw err
+																if (err) {
+																	req.flash('error', err)
+																	res.render('user/konfirmasi_bayar1', {
+																		title: '  konfirmasi_bayar ', 
+																		data: ''
+																	})
+																} else {
+																			req.getConnection(function(error, conn) {
+																				conn.query('SELECT * FROM guest WHERE id_guest = ' + req.params.id, function(err, rows2, fields) {
+																					if(err) throw err
+																					
+																					// if campaign1 not found
+																					if (rows2.length <= 0) {
+																						req.flash('error', ' not found with id = ' + req.params.id)
+																						res.redirect('/login1_')
+																					}
+																					else { // if campaign1 found
+																						// render to views/campaign1/edit.ejs template file
+																							req.flash('success', 'Data added successfully!')
+																							 res.render('user/user_konfirmasi_bayar1', {
+																									title: 'Konfirmasi Bayar', 
+																									//data: rows[0],
+																									
+																									id_guest: rows2[0].id_guest,
+																									name_guest: rows2[0].name_guest,
+																									pass_guest: rows2[0].pass_guest,
+																									email_guest: rows2[0].email_guest,
+																									no_hp_guest: rows2[0].no_hp_guest					
+																								})
+																						
+																					}			
+																				})
+																			})	
+																		
+																}
+															})
+														})	
+														
+												}
+											})
+										})	
 							
-							// if campaign1 not found
-							if (rows2.length <= 0) {
-								req.flash('error', ' not found with id = ' + req.params.id)
-								res.redirect('/login1_')
-							}
-							else { // if campaign1 found
-								// render to views/campaign1/edit.ejs template file
-							
-									 res.render('user/user_konfirmasi_bayar1', {
-											title: 'Konfirmasi Bayar', 
-											//data: rows[0],
-											
-											id_guest: rows2[0].id_guest,
-											name_guest: rows2[0].name_guest,
-											pass_guest: rows2[0].pass_guest,
-											email_guest: rows2[0].email_guest,
-											no_hp_guest: rows2[0].no_hp_guest					
-										})
-								
-							}			
+
+								}
+							})
 						})
-					})	
 						
 				}
 			})

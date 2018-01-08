@@ -107,7 +107,7 @@ app.post('/add', function(req, res, next){
 																
 														var jum = rows[0].jumlah;
 														req.getConnection(function(error, conn) {
-															conn.query('UPDATE campaign SET income_cpg = ?',[jum],' WHERE id_cpg = ?',[id_cpg], function(err, rows, fields) {
+															conn.query('UPDATE campaign SET income_cpg = ? WHERE id_cpg = ?',[jum,id_cpg], function(err, rows, fields) {
 																//if(err) throw err
 																if (err) {
 																	req.flash('error', err)
