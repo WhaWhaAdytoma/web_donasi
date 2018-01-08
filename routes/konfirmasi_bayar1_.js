@@ -64,7 +64,10 @@ app.post('/add', function(req, res, next){
 			jum_donasi: req.sanitize('jum_donasi').escape().trim(),
 			tanggal: req.sanitize('tanggal').escape().trim()
 		}
-		var id_donasi = req.sanitize('id_donasi').escape().trim()
+		
+				var id_donasi = req.body.id_donasi;
+				//conn.query('SELECT * FROM admin WHERE email_admin = ?',[email],  function(err, rows, fields) {
+
 		req.getConnection(function(error, conn) {
 			conn.query('INSERT INTO konfirmasi_bayar SET ?', konfirmasi_bayar, function(err, result) {
 				//if(err) throw err
@@ -74,9 +77,61 @@ app.post('/add', function(req, res, next){
 					
 				
 				} else {				
-					req.flash('success', 'Data added successfully!')
-					res.redirect('/konfirmasi_bayar1_')	
-						
+					/*req.flash('success', 'Data added successfully!')
+					res.redirect('/konfirmasi_bayar1_')	*/
+						req.getConnection(function(error, conn) {
+							conn.query('SELECT * FROM transaksi WHERE id_donasi = ?',[id_donasi], function(err, rows, fields) {
+								//if(err) throw err
+								if (err) {
+									req.flash('error', err)
+									res.render('tampil/konfirmasi_bayar1', {
+										title: '  konfirmasi_bayar ', 
+										data: ''
+									})
+								} else {
+												
+										//UPDATE `campaign` SET `income_cpg` = '70000' WHERE `campaign`.`id_cpg` = 5;
+										//conn.query('UPDATE admin SET ? WHERE id_admin = ' + req.params.id1, admin, function(err, result) {
+										//'UPDATE `campaign` SET `income_cpg` = ?',[jum],' WHERE `id_cpg` = ?',[id_cpg],
+										var id_cpg = rows[0].id_cpg;
+										req.getConnection(function(error, conn) {
+											conn.query('SELECT sum(jum_donasi) AS jumlah FROM `view_laporan1` WHERE id_cpg = ?',[id_cpg], function(err, rows, fields) {
+												//if(err) throw err
+												if (err) {
+													req.flash('error', err)
+													res.render('tampil/konfirmasi_bayar1', {
+														title: '  konfirmasi_bayar ', 
+														data: ''
+													})
+												} else {
+																
+														var jum = rows[0].jumlah;
+														req.getConnection(function(error, conn) {
+															conn.query('UPDATE campaign SET income_cpg = ?',[jum],' WHERE id_cpg = ?',[id_cpg], function(err, rows, fields) {
+																//if(err) throw err
+																if (err) {
+																	req.flash('error', err)
+																	res.render('tampil/konfirmasi_bayar1', {
+																		title: '  konfirmasi_bayar ', 
+																		data: ''
+																	})
+																} else {
+																		req.flash('success', 'Data added successfully!')
+																		res.redirect('/konfirmasi_bayar1_')	
+																		
+																}
+															})
+														})	
+														
+												}
+											})
+										})	
+							
+
+								}
+							})
+						})	
+											
 				}
 			})
 		})
@@ -100,3 +155,4 @@ app.post('/add', function(req, res, next){
 
 
 module.exports = app
+
